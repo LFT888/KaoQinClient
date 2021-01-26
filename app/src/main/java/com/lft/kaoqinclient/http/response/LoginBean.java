@@ -1,5 +1,7 @@
 package com.lft.kaoqinclient.http.response;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * TODO
  * author LFT
@@ -13,4 +15,5 @@ public final class LoginBean {
     public String getToken() {
         return token;
     }
+
 }

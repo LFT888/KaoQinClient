@@ -139,10 +139,10 @@ public final class RequestHandler implements IRequestHandler {
 
             if (result instanceof HttpData) {
                 HttpData model = (HttpData) result;
-                if (model.getCode() == 0) {
+                if (model.getCode() == 20000) {
                     // 代表执行成功
                     return result;
-                } else if (model.getCode() == 1001) {
+                } else if (model.getCode() == 20002) {
                     // 代表登录失效，需要重新登录
                     throw new TokenException(mApplication.getString(R.string.http_account_error));
                 } else {

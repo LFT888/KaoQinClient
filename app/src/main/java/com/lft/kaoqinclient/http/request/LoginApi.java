@@ -12,16 +12,16 @@ public final class LoginApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "user/login";
+        return "login";
     }
 
     /** 学工号 */
-    private String id;
+    private String username;
     /** 登录密码 */
     private String password;
 
-    public LoginApi setId(String id) {
-        this.id = id;
+    public LoginApi setId(String username) {
+        this.username = username;
         return this;
     }
 

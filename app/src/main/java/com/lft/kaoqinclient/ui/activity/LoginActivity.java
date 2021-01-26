@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -62,7 +63,7 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
     /** logo 缩放比例 */
     private final float mLogoScale = 0.8f;
     /** 动画时间 */
-    private final int mAnimTime = 300;
+    private final int mAnimTime = 200;
 
     @Override
     protected int getLayoutId() {
@@ -98,7 +99,7 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
             }
         }, 500);
 
-        // 填充传入的手机号和密码
+        // 填充传入的账号和密码
         mIdView.setText(getString(IntentKey.ID));
         mPasswordView.setText(getString(IntentKey.PASSWORD));
     }
@@ -156,15 +157,6 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
 //                return;
 //            }
 
-            if (true) {
-                showDialog();
-                postDelayed(() -> {
-                    hideDialog();
-                    startActivity(HomeActivity.class);
-                    finish();
-                }, 2000);
-                return;
-            }
 
             EasyHttp.post(this)
                     .api(new LoginApi()
@@ -177,11 +169,24 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
                             // 更新 Token
                             EasyConfig.getInstance()
                                     .addParam("token", data.getData().getToken());
+
+                            Log.w("token", EasyConfig.getInstance().getParams().get("token").toString());
+
                             // 跳转到主页
                             startActivity(HomeActivity.class);
                             finish();
                         }
                     });
+
+//            if (true) {
+//                showDialog();
+//                postDelayed(() -> {
+//                    hideDialog();
+//                    startActivity(HomeActivity.class);
+//                    finish();
+//                }, 2000);
+//                return;
+//            }
         }
     }
 
