@@ -104,6 +104,54 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
         mPasswordView.setText(getString(IntentKey.PASSWORD));
     }
 
+
+    @Override
+    public void onRightClick(View v) {
+        // 跳转到注册界面
+        startActivityForResult(RegisterActivity.class, (resultCode, data) -> {
+            // 如果已经注册成功，就执行登录操作
+            if (resultCode == RESULT_OK && data != null) {
+                mIdView.setText(data.getStringExtra(IntentKey.ID));
+                mPasswordView.setText(data.getStringExtra(IntentKey.PASSWORD));
+                mPasswordView.setSelection(mPasswordView.getText().length());
+                onClick(mCommitView);
+            }
+        });
+    }
+
+    @SingleClick
+    @Override
+    public void onClick(View v) {
+        if (v == mForgetView) {
+            startActivity(PasswordForgetActivity.class);
+        } else if (v == mCommitView) {
+
+            EasyHttp.post(this)
+                    .api(new LoginApi()
+                            .setId(mIdView.getText().toString())
+                            .setPassword(mPasswordView.getText().toString()))
+                    .request(new HttpCallback<HttpData<LoginBean>>(this) {
+
+                        @Override
+                        public void onSucceed(HttpData<LoginBean> data) {
+                            // 更新 Token
+                            EasyConfig.getInstance()
+                                    .addParam("token", data.getData().getToken());
+
+                            // 跳转到主页
+                            startActivity(HomeActivity.class);
+                            finish();
+                        }
+                    });
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     public void onSoftKeyboardOpened(int keyboardHeight) {
         int screenHeight = getResources().getDisplayMetrics().heightPixels;
@@ -131,68 +179,6 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
             animatorSet.setDuration(mAnimTime);
             animatorSet.start();
         }
-    }
-
-    @Override
-    public void onRightClick(View v) {
-        // 跳转到注册界面
-//        startActivityForResult(RegisterActivity.class, (resultCode, data) -> {
-//            // 如果已经注册成功，就执行登录操作
-//            if (resultCode == RESULT_OK && data != null) {
-//                mPhoneView.setText(data.getStringExtra(IntentKey.PHONE));
-//                mPasswordView.setText(data.getStringExtra(IntentKey.PASSWORD));
-//                mPasswordView.setSelection(mPasswordView.getText().length());
-//                onClick(mCommitView);
-//            }
-//        });
-    }
-    @SingleClick
-    @Override
-    public void onClick(View v) {
-        if (v == mForgetView) {
-            startActivity(PasswordForgetActivity.class);
-        } else if (v == mCommitView) {
-//            if (mIdView.getText().toString().length() != 11) {
-//                toast(R.string.common_phone_input_error);
-//                return;
-//            }
-
-
-            EasyHttp.post(this)
-                    .api(new LoginApi()
-                            .setId(mIdView.getText().toString())
-                            .setPassword(mPasswordView.getText().toString()))
-                    .request(new HttpCallback<HttpData<LoginBean>>(this) {
-
-                        @Override
-                        public void onSucceed(HttpData<LoginBean> data) {
-                            // 更新 Token
-                            EasyConfig.getInstance()
-                                    .addParam("token", data.getData().getToken());
-
-                            Log.w("token", EasyConfig.getInstance().getParams().get("token").toString());
-
-                            // 跳转到主页
-                            startActivity(HomeActivity.class);
-                            finish();
-                        }
-                    });
-
-//            if (true) {
-//                showDialog();
-//                postDelayed(() -> {
-//                    hideDialog();
-//                    startActivity(HomeActivity.class);
-//                    finish();
-//                }, 2000);
-//                return;
-//            }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

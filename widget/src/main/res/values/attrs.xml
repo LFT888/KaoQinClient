@@ -27,6 +27,9 @@
             <enum name="name" value="0x05" />
             <!-- 非空格字符 -->
             <enum name="nonnull" value="0x06" />
+            <!-- 邮箱 -->
+            <enum name="email" value="0x07" />
+
         </attr>
     </declare-styleable>
 

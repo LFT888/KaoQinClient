@@ -9,6 +9,9 @@
     <string name="common_phone_input_hint">输入手机号码</string>
     <string name="common_phone_input_error">手机号输入不正确</string>
 
+    <string name="common_email_input_hint">输入邮箱</string>
+    <string name="common_email_input_error">邮箱不正确</string>
+
     <string name="common_password_input_hint">请输入密码</string>
     <string name="common_password_input_unlike">两次密码输入不一致，请重新输入</string>
 
@@ -120,7 +123,7 @@
 
     <!-- 注册 -->
     <string name="register_title">注册</string>
-    <string name="register_hint">手机号仅用于登录和保护账号安全</string>
+    <string name="register_hint">邮箱仅用于登录和保护账号安全</string>
     <string name="register_password_hint1">设置6&#8211;18位登录密码</string>
     <string name="register_password_hint2">请再次输入一次密码</string>
     <string name="register_succeed">注册成功</string>

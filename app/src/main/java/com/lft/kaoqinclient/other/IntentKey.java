@@ -53,6 +53,8 @@ public final class IntentKey {
     public static final String SEX = "sex";
     /** 手机 */
     public static final String PHONE = "phone";
+    /** 邮箱 */
+    public static final String EMAIL = "email";
     /** 密码 */
     public static final String PASSWORD = "password";
     /** 会员 */

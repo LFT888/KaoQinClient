@@ -11,7 +11,7 @@ public class HttpData<T> {
     /** 返回码 */
     private int code;
     /** 提示语 */
-    private String msg;
+    private String message;
     /** 数据 */
     private T data;
 
@@ -20,7 +20,7 @@ public class HttpData<T> {
     }
 
     public String getMessage() {
-        return msg;
+        return message;
     }
 
     public T getData() {

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.activity.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layoutAnimation="@anim/fall_down_layout"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp"
+        tools:layoutAnimation="@null">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_register_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/register_title"
+            android:textColor="@color/black60"
+            android:textSize="23sp" />
+
+
+        <com.lft.widget.view.ClearEditText
+            android:id="@+id/et_register_email"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:hint="@string/common_email_input_hint"
+            android:inputType="textVisiblePassword"
+            android:singleLine="true" />
+
+        <View style="@style/HorizontalLineStyle" />
+
+        <com.lft.widget.view.ClearEditText
+            android:id="@+id/et_register_userId"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/common_id_input_hint"
+            android:maxLength="20"
+            android:maxLines="1"
+            app:regexType="count" />
+
+        <View style="@style/HorizontalLineStyle" />
+
+        <com.lft.widget.view.PasswordEditText
+            android:id="@+id/et_register_password1"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/register_password_hint1"
+            android:maxLength="20"
+            android:maxLines="1" />
+
+        <View style="@style/HorizontalLineStyle" />
+
+        <com.lft.widget.view.PasswordEditText
+            android:id="@+id/et_register_password2"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/register_password_hint2"
+            android:maxLength="20"
+            android:maxLines="1" />
+
+        <View style="@style/HorizontalLineStyle" />
+
+        <com.lft.widget.view.ClearEditText
+            android:id="@+id/et_register_name"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="输入姓名"
+            android:maxLength="20"
+            android:maxLines="1" />
+
+        <View style="@style/HorizontalLineStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioGroup
+                android:id="@+id/rg_register_sex"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rb_register_man"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@null"
+                    android:button="@drawable/radiobutton_selector"
+                    android:text="男"
+                    android:checked="true" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rb_register_wom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@null"
+                    android:text="女"
+                    android:button="@drawable/radiobutton_selector" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+            <RadioGroup
+                android:id="@+id/rg_register_identity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rb_register_student"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@null"
+                    android:button="@drawable/radiobutton_selector"
+                    android:text="学生"
+                    android:checked="true" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rb_register_teacher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@null"
+                    android:text="老师"
+                    android:button="@drawable/radiobutton_selector" />
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+        <com.lft.widget.view.ClearEditText
+            android:id="@+id/et_register_classname"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="学生专业班级"
+            android:maxLength="20"
+            android:maxLines="1" />
+
+        <View style="@style/HorizontalLineStyle" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_register_commit"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:text="@string/register_title" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

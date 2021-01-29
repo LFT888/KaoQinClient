@@ -70,7 +70,10 @@
         <activity
             android:name=".ui.activity.PasswordForgetActivity"
             />
+        <!-- 注册 -->
+        <activity android:name=".ui.activity.RegisterActivity"
 
+            />
 
 
 
