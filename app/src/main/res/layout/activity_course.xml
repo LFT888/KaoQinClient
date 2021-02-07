@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lft.kaoqinclient.ui.activity.CopyActivity">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="签到" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layoutAnimation="@anim/fall_down_layout"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp"
+        tools:layoutAnimation="@null">
+
+    <com.lft.widget.view.ClearEditText
+        android:id="@+id/et_student_sign_code"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="@string/common_sign_input_hint"
+        android:maxLength="4"
+        android:maxLines="1"
+        app:regexType="count" />
+
+    <View style="@style/HorizontalLineStyle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_student_sign_commit"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="30dp"
+        android:text="@string/common_sign" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:text="到课率:" />
+
+        <TextView
+            android:id="@+id/tv_attendance_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:text="0" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ca_course_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginVertical="15dp"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="1dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    app:contentPadding="5dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_course_card_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="1px"
+            android:gravity="left"
+            android:paddingVertical="10dp"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            tools:context="com.lft.kaoqinclient.ui.adapter.CoursesAdapter"
+            tools:text="我是条目" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_course_card_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="5px"
+            android:gravity="left"
+            android:paddingVertical="10dp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:context="com.lft.kaoqinclient.ui.adapter.CoursesAdapter"
+            tools:text="老师" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

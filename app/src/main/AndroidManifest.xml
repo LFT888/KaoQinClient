@@ -2,24 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lft.kaoqinclient">
-
     <!-- 联网权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
-
     <!-- 访问网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <!-- 外部存储读写权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <!-- 拍照权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
-
     <!-- 安装包的权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-
 
     <application
         android:name=".common.MyApplication"
@@ -34,25 +28,23 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute,LockedOrientationActivity"
         tools:replace="android:allowBackup,android:supportsRtl"
         tools:targetApi="n">
-
         <!-- 适配 Android 7.0 文件意图 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
-
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <!-- App 首页 -->
+        <!-- 闪屏界面 -->
         <activity
-            android:name="com.lft.kaoqinclient.ui.activity.HomeActivity"
+            android:name=".ui.activity.SplashActivity"
+            android:alwaysRetainTaskState="true"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <!-- 程序入口 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,22 +53,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- App 首页 -->
+        <activity
+            android:name=".ui.activity.HomeActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <!-- 登录 -->
-        <activity android:name="com.lft.kaoqinclient.ui.activity.LoginActivity"
+        <activity
+            android:name=".ui.activity.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <!-- 忘记密码 -->
-        <activity
-            android:name=".ui.activity.PasswordForgetActivity"
-            />
+        <activity android:name=".ui.activity.PasswordForgetActivity" />
+        <!-- 修改密码 -->
+        <activity android:name=".ui.activity.PasswordUpdateActivity" />
+        <activity android:name=".ui.activity.PasswordResetActivity" />
         <!-- 注册 -->
-        <activity android:name=".ui.activity.RegisterActivity"
-
-            />
-
-
-
+        <activity android:name=".ui.activity.RegisterActivity" />
         <!-- 崩溃界面 -->
         <activity
             android:name=".ui.activity.CrashActivity"
@@ -84,6 +79,8 @@
             android:launchMode="singleTop"
             android:process=":crash"
             android:screenOrientation="landscape" />
+
+
     </application>
 
 </manifest>

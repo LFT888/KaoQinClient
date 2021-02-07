@@ -65,9 +65,7 @@ public final class HomeFragment extends MyFragment<HomeActivity>
         mViewPager = findViewById(R.id.vp_home_pager);
 
         mPagerAdapter = new BaseFragmentAdapter<>(this);
-        mPagerAdapter.addFragment(StatusFragment.newInstance(), "列表 A");
-        mPagerAdapter.addFragment(StatusFragment.newInstance(), "列表 B");
-        mPagerAdapter.addFragment(StatusFragment.newInstance(), "列表 C");
+        mPagerAdapter.addFragment(CoursesFragment.newInstance(), "课表");
         mViewPager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 

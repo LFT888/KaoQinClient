@@ -123,7 +123,7 @@ public final class RegisterActivity extends MyActivity {
                             toast(R.string.register_succeed);
                             //数据返回给登录页
                             setResult(RESULT_OK, new Intent()
-                                    .putExtra(IntentKey.ID, mUserIdView.getText().toString())
+                                    .putExtra(IntentKey.USER_ID, mUserIdView.getText().toString())
                                     .putExtra(IntentKey.PASSWORD, mPasswordView1.getText().toString()));
                             finish();
                         }

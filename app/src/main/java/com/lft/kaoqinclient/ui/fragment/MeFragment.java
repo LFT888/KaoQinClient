@@ -1,21 +1,33 @@
 package com.lft.kaoqinclient.ui.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
 
+import com.hjq.http.EasyConfig;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.lft.kaoqinclient.R;
 import com.lft.kaoqinclient.aop.SingleClick;
 import com.lft.kaoqinclient.common.MyFragment;
+import com.lft.kaoqinclient.http.model.HttpData;
+import com.lft.kaoqinclient.http.request.LoginOutApi;
+import com.lft.kaoqinclient.http.request.PasswordApi;
+import com.lft.kaoqinclient.http.request.UserInfoApi;
+import com.lft.kaoqinclient.http.response.UserInfoBean;
 import com.lft.kaoqinclient.ui.activity.CopyActivity;
 import com.lft.kaoqinclient.ui.activity.LoginActivity;
+import com.lft.kaoqinclient.ui.activity.PasswordUpdateActivity;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,6 +41,8 @@ public class MeFragment extends MyFragment<CopyActivity> {
         return new MeFragment();
     }
 
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_me;
@@ -36,30 +50,69 @@ public class MeFragment extends MyFragment<CopyActivity> {
 
     @Override
     protected void initView() {
-        setOnClickListener(R.id.btn_me_dialog, R.id.btn_me_hint, R.id.btn_me_login, R.id.btn_me_register, R.id.btn_me_forget,
-                R.id.btn_me_reset, R.id.btn_me_change, R.id.btn_me_personal, R.id.btn_message_setting, R.id.btn_me_about,
-                R.id.btn_me_guide, R.id.btn_me_browser, R.id.btn_me_image_select, R.id.btn_me_image_preview,
-                R.id.btn_me_video_select, R.id.btn_me_video_play, R.id.btn_me_crash);
+
+        setOnClickListener(R.id.btn_login_out, R.id.btn_me_login, R.id.btn_update_password);
     }
 
     @Override
     protected void initData() {
+
+        EasyHttp.get(this)
+                .api(new UserInfoApi())
+                .request(new HttpCallback<HttpData<UserInfoBean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<UserInfoBean> data) {
+                        UserInfoBean user = data.getData();
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                        sharedPreferences.edit()
+                                .putString("user_uid", user.getUid())
+                                .putString("user_email", user.getEmail())
+                                .putInt("user_id", user.getId())
+                                .putString("user_identity",user.getIdentity())
+                                .putString("user_sex", user.getSex())
+                                .putString("user_class", user.getClassName())
+                                .apply();
+
+
+                    }
+
+                });
 
     }
 
     @SingleClick
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_me_login:
-                startActivity(LoginActivity.class);
-                break;
-            case R.id.btn_me_crash:
-                // 关闭 Bugly 异常捕捉
-                CrashReport.closeBugly();
-                throw new IllegalStateException("are you ok?");
-            default:
-                break;
+        if (v.getId() == R.id.btn_login_out){
+
+            EasyHttp.get(this)
+                    .api(new LoginOutApi())
+                    .request(new HttpCallback<HttpData<Void>>(this) {
+
+                        @Override
+                        public void onSucceed(HttpData<Void> data) {
+                            HashMap hashMap = new HashMap();
+                            hashMap.put("Authorization", "");
+                            EasyConfig.getInstance().setHeaders(hashMap);
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                            sharedPreferences.edit().remove("Authorization");
+                            toast(R.string.login_out_success);
+                            finish();
+                            startActivity(LoginActivity.class);
+                        }
+
+                    });
+        }
+        else if (v.getId() == R.id.btn_me_login){
+
+            startActivity(LoginActivity.class);
+
+        }
+        else if (v.getId() == R.id.btn_update_password){
+
+            startActivity(PasswordUpdateActivity.class);
+
         }
     }
 

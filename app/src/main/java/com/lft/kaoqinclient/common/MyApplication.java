@@ -133,6 +133,7 @@ public final class MyApplication extends Application implements LifecycleOwner {
                 // 启用配置
                 .into();
 
+
         // Activity 侧滑返回
         SmartSwipeBack.activitySlidingBack(application, activity -> {
             if (activity instanceof SwipeAction) {

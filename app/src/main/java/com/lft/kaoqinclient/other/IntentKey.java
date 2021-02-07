@@ -11,7 +11,7 @@ public final class IntentKey {
     // 常用相关
 
     /** id */
-    public static final String ID = "id";
+    public static final String USER_ID = "user_id";
     /** token */
     public static final String TOKEN = "token";
     /** 标题 */
@@ -100,4 +100,15 @@ public final class IntentKey {
     public static final String ALI_PAY = "ali_pay";
     /** 银联支付 */
     public static final String UNION_PAY = "union_pay";
+
+    //课程相关
+    public static final String CS_ID = "cs_id";
+    public static final String COURSE_ID = "course_id";
+    public static final String STUDENT_ID = "student_id";
+    public static final String COURSE_NAME = "course_name";
+    public static final String LEAVE_NUMBER = "leave_number";
+    public static final String LATE_NUMBER = "late_number";
+    public static final String SIGN_NUMBER = "sign_number";
+    public static final String ATTENDANCE_RATE = "attendance_rate";
+
 }

@@ -10,4 +10,4 @@
     android:textColor="@color/black"
     android:textSize="18sp"
     android:textStyle="bold"
-    tools:text="2018年" />
+    tools:text="LFT" />

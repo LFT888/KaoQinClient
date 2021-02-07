@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.PasswordResetActivity">
+
+    <com.hjq.bar.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/password_update_title" />
+
+    <com.lft.widget.view.PasswordEditText
+        android:id="@+id/et_password_update_old"
+        style="@style/EditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/white"
+        android:drawablePadding="15dp"
+        android:hint="@string/password_old_input"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="18dp"
+        android:singleLine="true" />
+
+    <View
+        style="@style/HorizontalLineStyle"
+        android:layout_marginHorizontal="20dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_password_forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/login_forget"
+        android:textColor="@color/colorAccent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_password_update_next"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="30dp"
+        android:text="@string/common_step_next" />
+
+</LinearLayout>

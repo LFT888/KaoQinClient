@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
     @DebugLog
     public static void start(Context context, String id, String password) {
         Intent intent = new Intent(context, LoginActivity.class);
-        intent.putExtra(IntentKey.ID, id);
+        intent.putExtra(IntentKey.USER_ID, id);
         intent.putExtra(IntentKey.PASSWORD, password);
         context.startActivity(intent);
     }
@@ -100,7 +101,7 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
         }, 500);
 
         // 填充传入的账号和密码
-        mIdView.setText(getString(IntentKey.ID));
+        mIdView.setText(getString(IntentKey.USER_ID));
         mPasswordView.setText(getString(IntentKey.PASSWORD));
     }
 
@@ -111,7 +112,7 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
         startActivityForResult(RegisterActivity.class, (resultCode, data) -> {
             // 如果已经注册成功，就执行登录操作
             if (resultCode == RESULT_OK && data != null) {
-                mIdView.setText(data.getStringExtra(IntentKey.ID));
+                mIdView.setText(data.getStringExtra(IntentKey.USER_ID));
                 mPasswordView.setText(data.getStringExtra(IntentKey.PASSWORD));
                 mPasswordView.setSelection(mPasswordView.getText().length());
                 onClick(mCommitView);
@@ -123,8 +124,10 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
     @Override
     public void onClick(View v) {
         if (v == mForgetView) {
+            //忘记密码
             startActivity(PasswordForgetActivity.class);
         } else if (v == mCommitView) {
+
 
             EasyHttp.post(this)
                     .api(new LoginApi()
@@ -134,13 +137,17 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
 
                         @Override
                         public void onSucceed(HttpData<LoginBean> data) {
-                            // 更新 Token
-                            EasyConfig.getInstance()
-                                    .addParam("token", data.getData().getToken());
 
+                            // 添加全局请求头
+                            EasyConfig.getInstance()
+                                    .addHeader("Authorization", "Bearer "+data.getData().getToken());
+                            //保存本地
+                            SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+                            sharedPreferences.edit().putString("Authorization", "Bearer "+data.getData().getToken());
                             // 跳转到主页
                             startActivity(HomeActivity.class);
                             finish();
+
                         }
                     });
 

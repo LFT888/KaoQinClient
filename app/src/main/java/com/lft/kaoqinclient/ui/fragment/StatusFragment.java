@@ -61,6 +61,7 @@ public final class StatusFragment extends MyFragment<MyActivity>
         footerView.setOnClickListener(v -> toast("点击了尾部"));
 
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
+
     }
 
     @Override

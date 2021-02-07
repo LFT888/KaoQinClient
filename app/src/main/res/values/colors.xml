@@ -29,4 +29,8 @@
     <color name="colorConfirm">#007AFF</color>
     <!-- 对话框取消按钮文本颜色 -->
     <color name="colorCancel">#F44336</color>
+
+    <!-- 卡片颜色 -->
+    <color name="greenCard">#80b917</color>
+    <color name="redCard">#ef1989</color>
 </resources>

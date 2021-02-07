@@ -12,13 +12,13 @@ public final class GetCodeApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "code/get";
+        return "user/code-get";
     }
 
     /** email */
     private String email;
 
-    public GetCodeApi setPhone(String email) {
+    public GetCodeApi setEmail(String email) {
         this.email = email;
         return this;
     }

@@ -42,7 +42,18 @@
         <item name="android:background">@drawable/button_selector</item>
         <item name="android:foreground">@null</item>
     </style>
-
+    <!-- 红圆角按钮样式 -->
+    <style name="RedButtonStyle" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:paddingStart">32dp</item>
+        <item name="android:paddingEnd">32dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white90</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/button_selector_red</item>
+        <item name="android:foreground">@null</item>
+    </style>
     <!-- 不带圆角按钮样式 -->
     <style name="RectButtonStyle" parent="ButtonStyle">
         <item name="android:background">@drawable/button_rect_selector</item>

@@ -142,7 +142,8 @@ public final class RequestHandler implements IRequestHandler {
                 if (model.getCode() == 20000) {
                     // 代表执行成功
                     return result;
-                } else if (model.getCode() == 20002) {
+
+                } else if (model.getCode() == 50014) {
                     // 代表登录失效，需要重新登录
                     throw new TokenException(mApplication.getString(R.string.http_account_error));
                 } else {
