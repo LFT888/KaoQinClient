@@ -4,8 +4,13 @@ package com.lft.kaoqinclient.ui.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 
@@ -16,6 +21,8 @@ import com.hjq.http.listener.HttpCallback;
 import com.lft.kaoqinclient.R;
 import com.lft.kaoqinclient.aop.SingleClick;
 import com.lft.kaoqinclient.common.MyFragment;
+import com.lft.kaoqinclient.helper.ActivityStackManager;
+import com.lft.kaoqinclient.http.glide.GlideApp;
 import com.lft.kaoqinclient.http.model.HttpData;
 import com.lft.kaoqinclient.http.request.LoginOutApi;
 import com.lft.kaoqinclient.http.request.PasswordApi;
@@ -24,8 +31,11 @@ import com.lft.kaoqinclient.http.response.UserInfoBean;
 import com.lft.kaoqinclient.ui.activity.CopyActivity;
 import com.lft.kaoqinclient.ui.activity.LoginActivity;
 import com.lft.kaoqinclient.ui.activity.PasswordUpdateActivity;
+import com.lft.kaoqinclient.ui.activity.UserInfoActivity;
+import com.lft.widget.layout.SettingBar;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,11 +47,17 @@ import java.util.List;
  */
 public class MeFragment extends MyFragment<CopyActivity> {
 
+    private Button mLoginView;
+    private Button mLogoutView;
+    private SettingBar mUserInfo;
+    private SettingBar mUpdatePassword;
+
+    private ViewGroup mAvatarLayout;
+    private ImageView mAvatarView;
+
     public static MeFragment newInstance() {
         return new MeFragment();
     }
-
-
 
     @Override
     protected int getLayoutId() {
@@ -50,41 +66,47 @@ public class MeFragment extends MyFragment<CopyActivity> {
 
     @Override
     protected void initView() {
+        mAvatarLayout = findViewById(R.id.fl_me_avatar);
+        mAvatarView = findViewById(R.id.iv_me_avatar);
 
-        setOnClickListener(R.id.btn_login_out, R.id.btn_me_login, R.id.btn_update_password);
+        mLoginView = findViewById(R.id.btn_me_login);
+        mLogoutView = findViewById(R.id.btn_login_out);
+        mUserInfo = findViewById(R.id.sb_user_info);
+        mUpdatePassword = findViewById(R.id.sb_update_password);
+
+        setOnClickListener(mLoginView, mLogoutView, mUserInfo, mUpdatePassword);
     }
 
     @Override
     protected void initData() {
+        readImage();
 
-        EasyHttp.get(this)
-                .api(new UserInfoApi())
-                .request(new HttpCallback<HttpData<UserInfoBean>>(this) {
-
-                    @Override
-                    public void onSucceed(HttpData<UserInfoBean> data) {
-                        UserInfoBean user = data.getData();
-                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-                        sharedPreferences.edit()
-                                .putString("user_uid", user.getUid())
-                                .putString("user_email", user.getEmail())
-                                .putInt("user_id", user.getId())
-                                .putString("user_identity",user.getIdentity())
-                                .putString("user_sex", user.getSex())
-                                .putString("user_class", user.getClassName())
-                                .apply();
-
-
-                    }
-
-                });
+//        EasyHttp.get(this)
+//                .api(new UserInfoApi())
+//                .request(new HttpCallback<HttpData<UserInfoBean>>(this) {
+//
+//                    @Override
+//                    public void onSucceed(HttpData<UserInfoBean> data) {
+//                        UserInfoBean user = data.getData();
+//                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+//                        sharedPreferences.edit()
+//                                .putInt("user_id", user.getId())
+//                                .putString("user_uid", user.getUid())
+//                                .putString("user_name", user.getName())
+//                                .putString("user_email", user.getEmail())
+//                                .putString("user_identity",user.getIdentity())
+//                                .putString("user_sex", user.getSex())
+//                                .putString("user_class", user.getClassName())
+//                                .apply();
+//                    }
+//                });
 
     }
 
     @SingleClick
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_login_out){
+        if (v == mLogoutView){
 
             EasyHttp.get(this)
                     .api(new LoginOutApi())
@@ -100,19 +122,20 @@ public class MeFragment extends MyFragment<CopyActivity> {
                             toast(R.string.login_out_success);
                             finish();
                             startActivity(LoginActivity.class);
+                            // 进行内存优化，销毁除登录页之外的所有界面
+                            ActivityStackManager.getInstance().finishAllActivities(LoginActivity.class);
                         }
 
                     });
         }
-        else if (v.getId() == R.id.btn_me_login){
-
+        else if (v == mLoginView){
             startActivity(LoginActivity.class);
-
         }
-        else if (v.getId() == R.id.btn_update_password){
-
+        else if (v == mUpdatePassword){
             startActivity(PasswordUpdateActivity.class);
-
+        }
+        else if (v == mUserInfo){
+            startActivity(UserInfoActivity.class);
         }
     }
 
@@ -121,5 +144,19 @@ public class MeFragment extends MyFragment<CopyActivity> {
         // 使用沉浸式状态栏
         return !super.isStatusBarEnabled();
     }
+    private void readImage() {
+        File filesDir = getActivity().getFilesDir();
+        File file = new File(filesDir, "icon.png");
+        if (file.exists()) {
+            //存储--->内存
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
 
+            GlideApp.with(getActivity())
+                    .load(bitmap)
+                    .placeholder(R.drawable.avatar_placeholder_ic)
+                    .error(R.drawable.avatar_placeholder_ic)
+                    .circleCrop()
+                    .into(mAvatarView);
+        }
+    }
 }

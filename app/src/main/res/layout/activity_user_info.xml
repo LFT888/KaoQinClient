@@ -5,12 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.lft.kaoqinclient.ui.activity.CopyActivity">
+    tools:context="ui.activity.UserInfoActivity">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="个人信息" />
+
+    <com.lft.widget.layout.SettingBar
+        android:id="@+id/fl_user_info_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_selector"
+        app:bar_leftText="@string/personal_data_head">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_user_info_avatar"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="20dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/avatar_placeholder_ic" />
+
+    </com.lft.widget.layout.SettingBar>
+
+    <com.lft.widget.layout.SettingBar
+        android:id="@+id/sb_user_info_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        app:bar_leftText="@string/personal_data_id"
+        tools:bar_rightText="17115012036" />
+
+    <com.lft.widget.layout.SettingBar
+        android:id="@+id/sb_user_info_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_name"
+        tools:bar_rightText="林丰涛" />
+    <com.lft.widget.layout.SettingBar
+        android:id="@+id/sb_user_info_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_sex"
+        app:bar_rightHint="@string/personal_data_sex_hint"
+        tools:bar_rightText="男" />
+    <com.lft.widget.layout.SettingBar
+        android:id="@+id/sb_user_info_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_email"
+        app:bar_rightHint="@string/personal_data_email_hint"
+        tools:bar_rightText="1744626599@qq.com" />
+    <com.lft.widget.layout.SettingBar
+        android:id="@+id/sb_user_info_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:bar_leftText="@string/personal_data_class"
+        app:bar_rightHint="@string/personal_data_class_hint"
+        tools:bar_rightText="17计科2班" />
 
 
 </LinearLayout>

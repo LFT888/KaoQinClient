@@ -37,7 +37,7 @@ public final class CourseActivity extends MyActivity {
 
     @DebugLog
     public static void start(Context context, CourseBean course) {
-        Intent intent = new Intent(context, PasswordResetActivity.class);
+        Intent intent = new Intent(context, CourseActivity.class);
         intent.putExtra(IntentKey.CS_ID, course.getId());
         intent.putExtra(IntentKey.COURSE_ID, course.getCourseId());
         intent.putExtra(IntentKey.STUDENT_ID, course.getStudentId());

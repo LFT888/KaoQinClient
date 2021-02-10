@@ -25,8 +25,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
  */
 public final class CoursesAdapter extends MyAdapter<CourseBean>{
 
-    private static int[] background = {R.drawable.shape_background_blue, R.drawable.shape_background_golden, R.drawable.shape_background_green, R.drawable.shape_background_red};
-
     public CoursesAdapter(Context context) {
         super(context);
     }
@@ -52,6 +50,7 @@ public final class CoursesAdapter extends MyAdapter<CourseBean>{
 
         @Override
         public void onBindView(int position) {
+            int[] background = {R.drawable.shape_background_blue, R.drawable.shape_background_golden, R.drawable.shape_background_green, R.drawable.shape_background_red};
             mCardView.setBackground(getDrawable(background[position % 4]));
             mTextView.setText(getItem(position).getCourseName());
             mTeacherView.setText(getItem(position).getSid());

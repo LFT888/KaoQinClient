@@ -21,4 +21,16 @@
             tools:listitem="@layout/item_picker" />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_floating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
+        app:borderWidth="0px"
+        app:elevation="1dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/add_ic" />
+
 </FrameLayout>

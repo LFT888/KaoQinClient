@@ -40,11 +40,37 @@ public final class SplashActivity extends MyActivity {
 
     @Override
     protected void initData() {
+
         if (AppConfig.isDebug()) {
             mDebugView.setVisibility(View.VISIBLE);
         } else {
             mDebugView.setVisibility(View.INVISIBLE);
         }
+
+
+        if (true){
+            SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+            sharedPreferences.edit()
+                    .putString("user_uid", "1744626599")
+                    .putString("user_name", "lft")
+                    .putString("user_email", "11@qq.com")
+                    .putString("user_identity", "student")
+                    .putString("user_sex", "男")
+                    .putString("user_class", "17计科2班")
+                    .apply();
+
+            mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
+
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    startActivity(HomeActivity.class);
+                    finish();
+                }
+            });
+            return;
+        }
+
+
         SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("Authorization", null);
         if (token != null) {
@@ -66,9 +92,10 @@ public final class SplashActivity extends MyActivity {
                             UserInfoBean user = data.getData();
                             SharedPreferences sp = getSharedPreferences("user", Context.MODE_PRIVATE);
                             sp.edit()
-                                    .putString("user_uid", user.getUid())
-                                    .putString("user_email", user.getEmail())
                                     .putInt("user_id", user.getId())
+                                    .putString("user_uid", user.getUid())
+                                    .putString("user_name", user.getName())
+                                    .putString("user_email", user.getEmail())
                                     .putString("user_identity",user.getIdentity())
                                     .putString("user_sex", user.getSex())
                                     .putString("user_class", user.getClassName())

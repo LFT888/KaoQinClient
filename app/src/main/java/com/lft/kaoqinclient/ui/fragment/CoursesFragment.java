@@ -1,21 +1,29 @@
 package com.lft.kaoqinclient.ui.fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.model.ResponseClass;
 
 import com.lft.base.BaseAdapter;
 import com.lft.kaoqinclient.R;
+import com.lft.kaoqinclient.aop.SingleClick;
 import com.lft.kaoqinclient.common.MyActivity;
 import com.lft.kaoqinclient.common.MyFragment;
 import com.lft.kaoqinclient.http.model.HttpData;
 import com.lft.kaoqinclient.http.request.StudentCoursesApi;
 import com.lft.kaoqinclient.http.response.CourseBean;
+import com.lft.kaoqinclient.other.IntentKey;
+import com.lft.kaoqinclient.ui.activity.CameraActivity;
 import com.lft.kaoqinclient.ui.activity.CourseActivity;
+import com.lft.kaoqinclient.ui.activity.ImageSelectActivity;
 import com.lft.kaoqinclient.ui.adapter.CoursesAdapter;
 import com.lft.widget.layout.WrapRecyclerView;
 
@@ -38,6 +46,7 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView mRecyclerView;
+    private FloatingActionButton mFloatingView;
 
     private CoursesAdapter mAdapter;
 
@@ -51,6 +60,7 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
 
         mRefreshLayout = findViewById(R.id.rl_courses_refresh);
         mRecyclerView = findViewById(R.id.rv_courses_list);
+        mFloatingView = findViewById(R.id.fab_add_floating);
 
         mAdapter = new CoursesAdapter(getAttachActivity());
         mAdapter.setOnItemClickListener(this);
@@ -58,6 +68,8 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
 
         mRefreshLayout.setEnableRefresh(false);
         mRefreshLayout.setEnableLoadMore(false);
+
+        setOnClickListener(mFloatingView);
 
     }
 
@@ -69,19 +81,6 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
     private List<CourseBean> coursesData(){
         List<CourseBean> list;
 
-        try {
-            HttpData<List<CourseBean>> data = EasyHttp.post(getAttachActivity())
-                    .api(new StudentCoursesApi())
-                    .execute(new ResponseClass<HttpData<List<CourseBean>>>() {});
-
-            list =  data.getData();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
-
         list = new ArrayList<>();
         CourseBean cb;
         for (int i3 = 0; i3 < 15; i3++){
@@ -91,8 +90,41 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
             list.add(cb);
         }
 
+
+//        try {
+//            HttpData<List<CourseBean>> data = EasyHttp.post(getAttachActivity())
+//                    .api(new StudentCoursesApi())
+//                    .execute(new ResponseClass<HttpData<List<CourseBean>>>() {});
+//
+//            list =  data.getData();
+//
+//        } catch (Exception e) {
+//
+//            e.printStackTrace();
+//
+//        }
+
+
+
         return list;
     }
+
+
+    @SingleClick
+    @Override
+    public void onClick(View v) {
+        if (v == mFloatingView) {
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+            if (sharedPreferences.getString("user_identity", "null").equals("student")){
+
+            }
+            else if (sharedPreferences.getString("user_identity", "null").equals("teacher")){
+
+            }
+
+        }
+    }
+
 
     /**
      * {@link BaseAdapter.OnItemClickListener}
@@ -103,6 +135,7 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+
 
         CourseActivity.start(getActivity(), mAdapter.getItem(position));
 

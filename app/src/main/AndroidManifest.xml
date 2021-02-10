@@ -65,13 +65,70 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+        <!-- 注册界面 -->
+        <activity
+            android:name=".ui.activity.RegisterActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 忘记密码 -->
-        <activity android:name=".ui.activity.PasswordForgetActivity" />
+        <activity
+            android:name=".ui.activity.PasswordForgetActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/password_forget_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 重置密码 -->
+        <activity
+            android:name=".ui.activity.PasswordResetActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/password_reset_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 修改密码 -->
-        <activity android:name=".ui.activity.PasswordUpdateActivity" />
-        <activity android:name=".ui.activity.PasswordResetActivity" />
-        <!-- 注册 -->
-        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity
+            android:name=".ui.activity.PasswordUpdateActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/password_update_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 个人资料 -->
+        <activity
+            android:name=".ui.activity.UserInfoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/personal_data_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 学生课程详情页面 -->
+        <activity
+            android:name=".ui.activity.CourseActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+
+
+
+
+        <!-- 拍照选择 -->
+        <activity
+            android:name=".ui.activity.CameraActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 图片选择 -->
+        <activity
+            android:name=".ui.activity.ImageSelectActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/image_select_title"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 查看大图 -->
+        <activity
+            android:name=".ui.activity.ImagePreviewActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <!-- 崩溃界面 -->
         <activity
             android:name=".ui.activity.CrashActivity"

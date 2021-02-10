@@ -13,23 +13,33 @@
         android:layout_height="wrap_content"
         app:backButton="false"
         app:title="@string/home_nav_me" />
+    <com.lft.widget.layout.SettingBar
+        android:id="@+id/fl_me_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_selector"
+        tools:bar_leftText="姓名\n学号">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_me_avatar"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_margin="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/avatar_placeholder_ic" />
+
+    </com.lft.widget.layout.SettingBar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="15dp"
         android:gravity="center">
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/ButtonStyle"
-            android:id="@+id/btn_me_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="登录" />
-
         <com.lft.widget.layout.SettingBar
-            android:id="@+id/btn_user_info"
+            android:id="@+id/sb_user_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -37,7 +47,7 @@
             app:bar_leftText="个人信息"
             app:bar_rightIcon="@drawable/arrows_right_ic" />
         <com.lft.widget.layout.SettingBar
-            android:id="@+id/btn_update_password"
+            android:id="@+id/sb_update_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -67,5 +77,13 @@
             android:layout_marginTop="20dp"
             android:text="退出登录" />
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/ButtonStyle"
+        android:id="@+id/btn_me_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="登录" />
 
 </LinearLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.lft.kaoqinclient.ui.activity.CopyActivity">
+    tools:context="ui.activity.CourseActivity">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"

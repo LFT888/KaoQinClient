@@ -107,8 +107,6 @@ dependencies {
     // 友盟封装
 //    implementation project(':umeng')
 
-    implementation 'androidx.cardview:cardview:1.0.0'
-
     // 网络请求框架：https://github.com/getActivity/EasyHttp
     implementation 'com.hjq:http:9.0'
 
