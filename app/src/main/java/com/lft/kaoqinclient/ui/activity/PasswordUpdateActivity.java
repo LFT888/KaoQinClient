@@ -45,8 +45,6 @@ public final class PasswordUpdateActivity extends MyActivity {
                 .addView(mOldPassword)
                 .setMain(mCommitView)
                 .build();
-
-
     }
 
     @Override
@@ -72,8 +70,6 @@ public final class PasswordUpdateActivity extends MyActivity {
 
                     });
         }
-
-
 
     }
 }

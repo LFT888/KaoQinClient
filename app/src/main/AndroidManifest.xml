@@ -105,9 +105,18 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
-
-
+        <!-- 学生添加课程 -->
+        <activity
+            android:name=".ui.activity.StudentAddCourseActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 老师添加课程 -->
+        <activity
+            android:name=".ui.activity.TeacherAddCourseActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
 
         <!-- 拍照选择 -->

@@ -54,11 +54,13 @@ public final class SplashActivity extends MyActivity {
                     .putString("user_uid", "1744626599")
                     .putString("user_name", "lft")
                     .putString("user_email", "11@qq.com")
-                    .putString("user_identity", "student")
+                    .putString("user_identity", "teacher")
                     .putString("user_sex", "男")
                     .putString("user_class", "17计科2班")
                     .apply();
 
+            EasyConfig.getInstance()
+                    .addHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNzExNTAxMjAzNiIsImV4cCI6MTYxNDA5MzkzMSwiaWF0IjoxNjEzNDg5MTMxfQ.PL1QWD-SAG3oZOf9IONf8a209ajhbZrB9qiAyem7dnCX_okbrV7n6P10T8C45SJZauU6T685fnK2cAmFWhyhaw");
             mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
 
                 @Override

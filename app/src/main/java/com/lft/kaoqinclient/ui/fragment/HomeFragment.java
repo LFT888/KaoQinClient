@@ -1,6 +1,8 @@
 package com.lft.kaoqinclient.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -65,7 +67,13 @@ public final class HomeFragment extends MyFragment<HomeActivity>
         mViewPager = findViewById(R.id.vp_home_pager);
 
         mPagerAdapter = new BaseFragmentAdapter<>(this);
-        mPagerAdapter.addFragment(CoursesFragment.newInstance(), "课表");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        String identity = sharedPreferences.getString("user_identity", null);
+        if ("student".equals(identity)){
+            mPagerAdapter.addFragment(CoursesFragment.newInstance(), "课表");
+        }else if ("teacher".equals(identity)){
+            mPagerAdapter.addFragment(TeacherCourseFragment.newInstance(), "课程");
+        }
         mViewPager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 

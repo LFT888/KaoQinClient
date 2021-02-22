@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lft.kaoqinclient.ui.fragment.HomeFragment"
+    tools:ignore="HardcodedText">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0px">
+
+        <com.lft.kaoqinclient.widget.XCollapsingToolbarLayout
+            android:id="@+id/ctl_tac_bar"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:scrimVisibleHeightTrigger="100dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                app:srcCompat="@drawable/example_bg" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tb_tac_title"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:layout_marginEnd="20dp"
+                app:layout_collapseMode="pin" />
+
+            <com.hjq.bar.TitleBar
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                app:backButton="false"
+                app:barStyle="transparent"
+                app:layout_collapseMode="pin">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <com.lft.widget.view.ClearEditText
+                        android:id="@+id/et_create_course_name"
+                        android:layout_width="0px"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="20dp"
+                        android:gravity="center"
+                        android:drawablePadding="15dp"
+                        android:background="@drawable/home_search_bar_transparent_bg"
+                        android:hint="@string/teacher_add_course_name_hint"
+                        android:inputType="text"
+                        android:textColor="@color/white60"
+                        android:textSize="14sp"
+                        android:singleLine="true"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_create_course"
+                        style="@style/ButtonStyle"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="0dp"
+                        android:layout_marginVertical="0dp"
+                        android:text="@string/teacher_add_course" />
+                </LinearLayout>
+            </com.hjq.bar.TitleBar>
+
+        </com.lft.kaoqinclient.widget.XCollapsingToolbarLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_tac_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabRippleColor="@color/transparent"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/black25" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_tac_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

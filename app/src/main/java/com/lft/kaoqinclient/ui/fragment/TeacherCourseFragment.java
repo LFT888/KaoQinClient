@@ -1,34 +1,21 @@
 package com.lft.kaoqinclient.ui.fragment;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.hjq.http.EasyHttp;
-import com.hjq.http.model.ResponseClass;
-
 import com.lft.base.BaseAdapter;
 import com.lft.kaoqinclient.R;
 import com.lft.kaoqinclient.aop.SingleClick;
 import com.lft.kaoqinclient.common.MyActivity;
 import com.lft.kaoqinclient.common.MyFragment;
-import com.lft.kaoqinclient.http.model.HttpData;
-import com.lft.kaoqinclient.http.request.StudentCoursesApi;
 import com.lft.kaoqinclient.http.response.CourseBean;
-import com.lft.kaoqinclient.other.IntentKey;
-import com.lft.kaoqinclient.ui.activity.CameraActivity;
 import com.lft.kaoqinclient.ui.activity.CourseActivity;
-import com.lft.kaoqinclient.ui.activity.ImageSelectActivity;
-import com.lft.kaoqinclient.ui.activity.PasswordForgetActivity;
 import com.lft.kaoqinclient.ui.activity.StudentAddCourseActivity;
+import com.lft.kaoqinclient.ui.activity.TeacherAddCourseActivity;
 import com.lft.kaoqinclient.ui.adapter.CoursesAdapter;
 import com.lft.widget.layout.WrapRecyclerView;
-
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -38,12 +25,12 @@ import java.util.List;
  * TODO
  * author LFT
  *
- * @date 2021/1/31 22:25
+ * @date 2021/2/21 13:12
  */
-public final class CoursesFragment extends MyFragment<MyActivity> implements  BaseAdapter.OnItemClickListener{
+public class TeacherCourseFragment extends MyFragment<MyActivity> implements  BaseAdapter.OnItemClickListener{
 
-    public static CoursesFragment newInstance(){
-        return new CoursesFragment();
+    public static TeacherCourseFragment newInstance(){
+        return new TeacherCourseFragment();
     }
 
     private SmartRefreshLayout mRefreshLayout;
@@ -93,21 +80,6 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
         }
 
 
-//        try {
-//            HttpData<List<CourseBean>> data = EasyHttp.post(getAttachActivity())
-//                    .api(new StudentCoursesApi())
-//                    .execute(new ResponseClass<HttpData<List<CourseBean>>>() {});
-//
-//            list =  data.getData();
-//
-//        } catch (Exception e) {
-//
-//            e.printStackTrace();
-//
-//        }
-
-
-
         return list;
     }
 
@@ -116,7 +88,7 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
     @Override
     public void onClick(View v) {
         if (v == mFloatingView) {
-            startActivity(StudentAddCourseActivity.class);
+            startActivity(TeacherAddCourseActivity.class);
         }
     }
 
@@ -131,8 +103,6 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
 
-
-        CourseActivity.start(getActivity(), mAdapter.getItem(position));
 
     }
 }

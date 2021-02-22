@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/rl_teacher_courses_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePreviewInEditMode="false">
+
+        <com.lft.widget.layout.WrapRecyclerView
+            android:id="@+id/rv_teacher_courses_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white25"
+            tools:listCount="10"
+            tools:listitem="@layout/item_picker" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_teacher_add_floating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="20dp"
+        app:borderWidth="0px"
+        app:elevation="1dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/add_ic" />
+
+</FrameLayout>

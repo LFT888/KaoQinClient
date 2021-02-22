@@ -7,6 +7,16 @@
     <string name="sign_fail">签到失败</string>
 
 
+    <!-- 课程 -->
+    <string name="student_add_course_title">加入课程</string>
+    <string name="student_add_course_hint">输入课程号码</string>
+    <string name="student_add_course_next">查找课程</string>
+    <string name="student_add_course_join">申请加入</string>
+    <string name="teacher_add_course_title">添加课程</string>
+    <string name="teacher_add_course_name_hint">课程名</string>
+    <string name="teacher_add_course">创建课程</string>
+    <string name="teacher_add_course_student">添加学生</string>
+
     <!-- 通用的 -->
     <string name="common_id_input_hint">输入学工号</string>
     <string name="common_id_input_error">输入学工号不正确</string>
