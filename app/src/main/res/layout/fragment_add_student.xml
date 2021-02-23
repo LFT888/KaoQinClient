@@ -15,13 +15,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
-                style="@style/ButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="导入文件加入" />
-
-            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_student_by_class"
                 style="@style/ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,11 +23,20 @@
                 android:text="按班级加入" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_student_by_id"
                 style="@style/ButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="按学号加入" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_add_student_by_file"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="导入文件加入" />
 
         </LinearLayout>
 

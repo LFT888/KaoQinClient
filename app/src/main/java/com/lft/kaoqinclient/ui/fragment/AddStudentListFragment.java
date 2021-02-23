@@ -1,5 +1,6 @@
 package com.lft.kaoqinclient.ui.fragment;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +14,6 @@ import com.lft.kaoqinclient.ui.adapter.AddStudentAdapter;
 import com.lft.widget.layout.WrapRecyclerView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,14 +24,22 @@ import java.util.List;
  */
 public class AddStudentListFragment extends MyFragment<MyActivity> implements  BaseAdapter.OnItemClickListener, BaseAdapter.OnChildClickListener{
 
-    public static AddStudentListFragment newInstance(){
-        return new AddStudentListFragment();
-    }
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView mRecyclerView;
 
     private AddStudentAdapter mAdapter;
+
+    private  List<StudentInfoBean> list;
+
+    public static AddStudentListFragment newInstance(List<StudentInfoBean> list){
+        return new AddStudentListFragment(list);
+    }
+
+    public AddStudentListFragment(List<StudentInfoBean> list) {
+        super();
+        this.list = list;
+    }
 
     @Override
     protected int getLayoutId() {
@@ -57,22 +65,11 @@ public class AddStudentListFragment extends MyFragment<MyActivity> implements  B
 
     @Override
     protected void initData() {
-        mAdapter.setData(studentData());
+        mAdapter.setData(list);
     }
 
-    private List<StudentInfoBean> studentData(){
-        List<StudentInfoBean> list;
-        list = new ArrayList<>();
-        StudentInfoBean student;
-        for (int i3 = 0; i3 < 3; i3 ++)
-        {
-            student = new StudentInfoBean();
-            student.setUid("100"+i3);
-            student.setName("名为"+i3);
-            student.setClassName("wuhu班");
-            list.add(student);
-        }
-        return list;
+    public void setStudentList(){
+        mAdapter.setData(list);
     }
 
 
@@ -90,6 +87,9 @@ public class AddStudentListFragment extends MyFragment<MyActivity> implements  B
 
     @Override
     public void onChildClick(RecyclerView recyclerView, View childView, int position) {
-        toast(mAdapter.getItem(position).getName());
+        list.remove(position);
+        mAdapter.setData(list);
     }
+
+
 }

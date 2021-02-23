@@ -10,6 +10,7 @@ import com.hjq.http.config.IRequestApi;
  * @date 2021/1/26 21:46
  */
 public final class StudentCoursesApi implements IRequestApi {
+    //获取学生列表
 
     @Override
     public String getApi() {

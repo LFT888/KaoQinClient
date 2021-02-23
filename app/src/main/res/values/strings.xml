@@ -16,6 +16,7 @@
     <string name="teacher_add_course_name_hint">课程名</string>
     <string name="teacher_add_course">创建课程</string>
     <string name="teacher_add_course_student">添加学生</string>
+    <string name="class_name">班级名</string>
 
     <!-- 通用的 -->
     <string name="common_id_input_hint">输入学工号</string>

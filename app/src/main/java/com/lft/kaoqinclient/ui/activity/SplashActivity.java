@@ -51,7 +51,7 @@ public final class SplashActivity extends MyActivity {
         if (true){
             SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
             sharedPreferences.edit()
-                    .putString("user_uid", "1744626599")
+                    .putString("user_uid", "10086")
                     .putString("user_name", "lft")
                     .putString("user_email", "11@qq.com")
                     .putString("user_identity", "teacher")

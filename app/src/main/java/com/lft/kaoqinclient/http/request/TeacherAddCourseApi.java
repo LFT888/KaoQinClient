@@ -14,7 +14,7 @@ public class TeacherAddCourseApi implements IRequestApi {
 
     @Override
     public String getApi() {
-        return "teacher/add-course";
+        return "teacher/create-course/create";
     }
 
     private String courseName;
