@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.hjq.http.model.ResponseClass;
 
 import com.lft.base.BaseAdapter;
@@ -19,7 +20,9 @@ import com.lft.kaoqinclient.common.MyActivity;
 import com.lft.kaoqinclient.common.MyFragment;
 import com.lft.kaoqinclient.http.model.HttpData;
 import com.lft.kaoqinclient.http.request.StudentCoursesApi;
+import com.lft.kaoqinclient.http.request.TeacherCoursesApi;
 import com.lft.kaoqinclient.http.response.CourseBean;
+import com.lft.kaoqinclient.http.response.TeacherCourseBean;
 import com.lft.kaoqinclient.other.IntentKey;
 import com.lft.kaoqinclient.ui.activity.CameraActivity;
 import com.lft.kaoqinclient.ui.activity.CourseActivity;
@@ -51,6 +54,7 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
     private FloatingActionButton mFloatingView;
 
     private CoursesAdapter mAdapter;
+    private List<CourseBean> list;
 
     @Override
     protected int getLayoutId() {
@@ -81,34 +85,18 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
     }
 
     private List<CourseBean> coursesData(){
-        List<CourseBean> list;
 
-        list = new ArrayList<>();
-        CourseBean cb;
-        for (int i3 = 0; i3 < 15; i3++){
-            cb = new CourseBean();
-            cb.setCourseName("课程名"+i3);
-            cb.setSid("老师名");
-            list.add(cb);
-        }
+        EasyHttp.get(getAttachActivity())
+                .api(new StudentCoursesApi())
+                .request(new HttpCallback<HttpData<List<CourseBean>>>(getAttachActivity()){
+                    @Override
+                    public void onSucceed(HttpData<List<CourseBean>> data) {
+                        list = data.getData();
+                    }
 
+                });
 
-//        try {
-//            HttpData<List<CourseBean>> data = EasyHttp.post(getAttachActivity())
-//                    .api(new StudentCoursesApi())
-//                    .execute(new ResponseClass<HttpData<List<CourseBean>>>() {});
-//
-//            list =  data.getData();
-//
-//        } catch (Exception e) {
-//
-//            e.printStackTrace();
-//
-//        }
-
-
-
-        return list;
+        return list == null ? new ArrayList<>() : list;
     }
 
 
@@ -130,7 +118,6 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-
 
         CourseActivity.start(getActivity(), mAdapter.getItem(position));
 

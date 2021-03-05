@@ -14,7 +14,9 @@ import com.lft.kaoqinclient.R;
 import com.lft.kaoqinclient.aop.DebugLog;
 import com.lft.kaoqinclient.aop.SingleClick;
 import com.lft.kaoqinclient.common.MyActivity;
+import com.lft.kaoqinclient.helper.InputTextHelper;
 import com.lft.kaoqinclient.http.model.HttpData;
+import com.lft.kaoqinclient.http.request.CourseHaveCodeApi;
 import com.lft.kaoqinclient.http.request.StudentSignApi;
 import com.lft.kaoqinclient.http.response.CourseBean;
 import com.lft.kaoqinclient.other.IntentKey;
@@ -60,7 +62,26 @@ public final class CourseActivity extends MyActivity {
         codeView = findViewById(R.id.et_student_sign_code);
         attendanceRateView = findViewById(R.id.tv_attendance_rate);
 
+        EasyHttp.get(this).api(new CourseHaveCodeApi()
+                .setCourseId(getInt(IntentKey.COURSE_ID)))
+                .request(new HttpCallback<HttpData<Boolean>>(this){
+
+                    @Override
+                    public void onSucceed(HttpData<Boolean> data) {
+                        if (!data.getData()){
+                            codeView.setVisibility(View.INVISIBLE);
+                            signView.setText(getString(R.string.sign_no_code));
+                        }
+                    }
+
+                });
+
         setOnClickListener(signView);
+
+        InputTextHelper.with(this)
+                .addView(codeView)
+                .setMain(signView)
+                .build();
     }
 
     @Override
@@ -75,7 +96,6 @@ public final class CourseActivity extends MyActivity {
     public void onClick(View v) {
 
         if (v == signView) {
-
 
             if (codeView.getText().toString().length() != getResources().getInteger(R.integer.sign_code_length)) {
                 ToastUtils.show(R.string.sign_fail);
@@ -102,5 +122,6 @@ public final class CourseActivity extends MyActivity {
 
                     });
         }
+
     }
 }

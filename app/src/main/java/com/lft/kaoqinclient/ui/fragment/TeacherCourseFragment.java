@@ -2,21 +2,32 @@ package com.lft.kaoqinclient.ui.fragment;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
+import com.hjq.http.model.ResponseClass;
 import com.lft.base.BaseAdapter;
 import com.lft.kaoqinclient.R;
 import com.lft.kaoqinclient.aop.SingleClick;
 import com.lft.kaoqinclient.common.MyActivity;
 import com.lft.kaoqinclient.common.MyFragment;
+import com.lft.kaoqinclient.http.model.HttpData;
+import com.lft.kaoqinclient.http.request.TeacherCoursesApi;
 import com.lft.kaoqinclient.http.response.CourseBean;
+import com.lft.kaoqinclient.http.response.TeacherCourseBean;
+import com.lft.kaoqinclient.http.response.UserInfoBean;
 import com.lft.kaoqinclient.ui.activity.CourseActivity;
 import com.lft.kaoqinclient.ui.activity.StudentAddCourseActivity;
 import com.lft.kaoqinclient.ui.activity.TeacherAddCourseActivity;
 import com.lft.kaoqinclient.ui.adapter.CoursesAdapter;
+import com.lft.kaoqinclient.ui.adapter.TeacherCourseAdapter;
 import com.lft.widget.layout.WrapRecyclerView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +38,7 @@ import java.util.List;
  *
  * @date 2021/2/21 13:12
  */
-public class TeacherCourseFragment extends MyFragment<MyActivity> implements  BaseAdapter.OnItemClickListener{
+public class TeacherCourseFragment extends MyFragment<MyActivity> implements OnRefreshLoadMoreListener,BaseAdapter.OnItemClickListener{
 
     public static TeacherCourseFragment newInstance(){
         return new TeacherCourseFragment();
@@ -37,7 +48,9 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements  Ba
     private WrapRecyclerView mRecyclerView;
     private FloatingActionButton mFloatingView;
 
-    private CoursesAdapter mAdapter;
+    private TeacherCourseAdapter mAdapter;
+
+    private List<TeacherCourseBean> list = null;
 
     @Override
     protected int getLayoutId() {
@@ -51,15 +64,16 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements  Ba
         mRecyclerView = findViewById(R.id.rv_courses_list);
         mFloatingView = findViewById(R.id.fab_add_floating);
 
-        mAdapter = new CoursesAdapter(getAttachActivity());
+        mAdapter = new TeacherCourseAdapter(getAttachActivity());
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRefreshLayout.setEnableRefresh(false);
+//        mRefreshLayout.setEnableRefresh(false);
         mRefreshLayout.setEnableLoadMore(false);
 
         setOnClickListener(mFloatingView);
 
+        mRefreshLayout.setOnRefreshLoadMoreListener(this);
     }
 
     @Override
@@ -67,22 +81,20 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements  Ba
         mAdapter.setData(coursesData());
     }
 
-    private List<CourseBean> coursesData(){
-        List<CourseBean> list;
+    private List<TeacherCourseBean> coursesData(){
 
-        list = new ArrayList<>();
-        CourseBean cb;
-        for (int i3 = 0; i3 < 15; i3++){
-            cb = new CourseBean();
-            cb.setCourseName("课程名"+i3);
-            cb.setSid("老师名");
-            list.add(cb);
-        }
+        EasyHttp.get(getAttachActivity())
+                    .api(new TeacherCoursesApi())
+                    .request(new HttpCallback<HttpData<List<TeacherCourseBean>>>(getAttachActivity()){
+                        @Override
+                        public void onSucceed(HttpData<List<TeacherCourseBean>> data) {
+                            list = data.getData();
+                        }
 
+        });
 
-        return list;
+        return list == null ? new ArrayList<>() : list;
     }
-
 
     @SingleClick
     @Override
@@ -104,5 +116,20 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements  Ba
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
 
 
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        postDelayed(() -> {
+            mAdapter.clearData();
+            mAdapter.setData(coursesData());
+            mRefreshLayout.finishRefresh();
+            toast("刷新完成");
+        }, 1000);
     }
 }

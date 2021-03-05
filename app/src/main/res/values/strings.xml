@@ -5,6 +5,7 @@
     <!-- 签到 -->
     <string name="sign_success">签到成功</string>
     <string name="sign_fail">签到失败</string>
+    <string name="sign_no_code">当前无签到</string>
 
 
     <!-- 课程 -->

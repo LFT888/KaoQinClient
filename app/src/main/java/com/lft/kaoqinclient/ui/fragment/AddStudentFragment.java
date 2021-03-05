@@ -92,13 +92,18 @@ public class AddStudentFragment extends MyFragment<MyActivity>  {
     }
 
     private void addStudent(List<StudentInfoBean> param){
-        list.addAll(param);
-        callBackInterface.getStudentList();
+        if (param != null && param.size() != 0){
+            list.addAll(param);
+            callBackInterface.getStudentList();
+        }
     }
 
     private void addStudent(StudentInfoBean param){
-        list.add(param);
-        callBackInterface.getStudentList();
+        if (param != null){
+            list.add(param);
+            callBackInterface.getStudentList();
+        }
+
     }
 
     private void findStudentByClass(String name){
@@ -109,9 +114,9 @@ public class AddStudentFragment extends MyFragment<MyActivity>  {
                 .request(new HttpCallback<HttpData<List<StudentInfoBean>>>(this) {
                     @Override
                     public void onSucceed(HttpData<List<StudentInfoBean>> data) {
-                        if (data.getData()!=null){
+                        if (data.getData()!=null && data.getData().size() != 0){
                             addStudent(data.getData());
-                            toast("添加成功");
+                            toast("添加" + data.getData().size() + "名学生");
                         }
 
                     }
@@ -126,8 +131,10 @@ public class AddStudentFragment extends MyFragment<MyActivity>  {
                 .request(new HttpCallback<HttpData<StudentInfoBean>>(this) {
                     @Override
                     public void onSucceed(HttpData<StudentInfoBean> data) {
-                        addStudent(data.getData());
-
+                        if (data.getData()!=null){
+                            addStudent(data.getData());
+                            toast("添加成功");
+                        }
                     }
                 });
     }

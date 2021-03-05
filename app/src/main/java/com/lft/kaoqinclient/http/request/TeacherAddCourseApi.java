@@ -1,6 +1,7 @@
 package com.lft.kaoqinclient.http.request;
 
 import com.hjq.http.config.IRequestApi;
+import com.lft.kaoqinclient.http.response.StudentInfoBean;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class TeacherAddCourseApi implements IRequestApi {
 
     private String courseName;
     private String teacherUid;
-    private List studentList;
+    private List<StudentInfoBean> studentList;
 
     public TeacherAddCourseApi setCourseName(String courseName) {
         this.courseName = courseName;
