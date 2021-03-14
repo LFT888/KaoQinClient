@@ -73,6 +73,7 @@ public final class UserInfoActivity extends MyActivity {
         if (identity.equals("teacher")) {
             mClassView.setVisibility(View.INVISIBLE);
         }
+
         mIDView.setRightText(sharedPreferences.getString("user_uid", "null"));
         mNameView.setRightText(sharedPreferences.getString("user_name", "null"));
         mSexView.setRightText(sharedPreferences.getString("user_sex", "null"));

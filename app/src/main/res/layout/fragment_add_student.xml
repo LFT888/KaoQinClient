@@ -16,7 +16,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_add_student_by_class"
-                style="@style/ButtonStyle"
+                style="@style/BlueButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -24,7 +24,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_add_student_by_id"
-                style="@style/ButtonStyle"
+                style="@style/BlueButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -32,7 +32,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_add_student_by_file"
-                style="@style/ButtonStyle"
+                style="@style/BlueButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"

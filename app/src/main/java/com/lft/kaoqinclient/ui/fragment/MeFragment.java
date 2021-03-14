@@ -2,11 +2,9 @@ package com.lft.kaoqinclient.ui.fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,7 +23,6 @@ import com.lft.kaoqinclient.helper.ActivityStackManager;
 import com.lft.kaoqinclient.http.glide.GlideApp;
 import com.lft.kaoqinclient.http.model.HttpData;
 import com.lft.kaoqinclient.http.request.LoginOutApi;
-import com.lft.kaoqinclient.http.request.PasswordApi;
 import com.lft.kaoqinclient.http.request.UserInfoApi;
 import com.lft.kaoqinclient.http.response.UserInfoBean;
 import com.lft.kaoqinclient.ui.activity.CopyActivity;
@@ -33,12 +30,9 @@ import com.lft.kaoqinclient.ui.activity.LoginActivity;
 import com.lft.kaoqinclient.ui.activity.PasswordUpdateActivity;
 import com.lft.kaoqinclient.ui.activity.UserInfoActivity;
 import com.lft.widget.layout.SettingBar;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,8 +45,8 @@ public class MeFragment extends MyFragment<CopyActivity> {
     private Button mLogoutView;
     private SettingBar mUserInfo;
     private SettingBar mUpdatePassword;
+    private SettingBar mNameView;
 
-    private ViewGroup mAvatarLayout;
     private ImageView mAvatarView;
 
     public static MeFragment newInstance() {
@@ -66,7 +60,7 @@ public class MeFragment extends MyFragment<CopyActivity> {
 
     @Override
     protected void initView() {
-        mAvatarLayout = findViewById(R.id.fl_me_avatar);
+        mNameView = findViewById(R.id.sb_me_name);
         mAvatarView = findViewById(R.id.iv_me_avatar);
 
         mLoginView = findViewById(R.id.btn_me_login);
@@ -81,25 +75,28 @@ public class MeFragment extends MyFragment<CopyActivity> {
     protected void initData() {
         readImage();
 
-//        EasyHttp.get(this)
-//                .api(new UserInfoApi())
-//                .request(new HttpCallback<HttpData<UserInfoBean>>(this) {
-//
-//                    @Override
-//                    public void onSucceed(HttpData<UserInfoBean> data) {
-//                        UserInfoBean user = data.getData();
-//                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-//                        sharedPreferences.edit()
-//                                .putInt("user_id", user.getId())
-//                                .putString("user_uid", user.getUid())
-//                                .putString("user_name", user.getName())
-//                                .putString("user_email", user.getEmail())
-//                                .putString("user_identity",user.getIdentity())
-//                                .putString("user_sex", user.getSex())
-//                                .putString("user_class", user.getClassName())
-//                                .apply();
-//                    }
-//                });
+        EasyHttp.get(this)
+                .api(new UserInfoApi())
+                .request(new HttpCallback<HttpData<UserInfoBean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<UserInfoBean> data) {
+                        UserInfoBean user = data.getData();
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                        sharedPreferences.edit()
+                                .putInt("user_id", user.getId())
+                                .putString("user_uid", user.getUid())
+                                .putString("user_name", user.getName())
+                                .putString("user_email", user.getEmail())
+                                .putString("user_identity",user.getIdentity())
+                                .putString("user_sex", user.getSex())
+                                .putString("user_class", user.getClassName())
+                                .apply();
+                    }
+                });
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        mNameView.setLeftText(sharedPreferences.getString("user_uid", "") + '\n'+ sharedPreferences.getString("user_name", ""));
 
     }
 

@@ -33,6 +33,8 @@ import com.lft.kaoqinclient.ui.adapter.CoursesAdapter;
 import com.lft.widget.layout.WrapRecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ import java.util.List;
  *
  * @date 2021/1/31 22:25
  */
-public final class CoursesFragment extends MyFragment<MyActivity> implements  BaseAdapter.OnItemClickListener{
+public final class CoursesFragment extends MyFragment<MyActivity> implements OnRefreshLoadMoreListener,BaseAdapter.OnItemClickListener{
 
     public static CoursesFragment newInstance(){
         return new CoursesFragment();
@@ -51,7 +53,6 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
 
     private SmartRefreshLayout mRefreshLayout;
     private WrapRecyclerView mRecyclerView;
-    private FloatingActionButton mFloatingView;
 
     private CoursesAdapter mAdapter;
     private List<CourseBean> list;
@@ -66,16 +67,14 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
 
         mRefreshLayout = findViewById(R.id.rl_courses_refresh);
         mRecyclerView = findViewById(R.id.rv_courses_list);
-        mFloatingView = findViewById(R.id.fab_add_floating);
 
         mAdapter = new CoursesAdapter(getAttachActivity());
         mAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRefreshLayout.setEnableRefresh(false);
+//        mRefreshLayout.setEnableRefresh(false);
         mRefreshLayout.setEnableLoadMore(false);
-
-        setOnClickListener(mFloatingView);
+        mRefreshLayout.setOnRefreshLoadMoreListener(this);
 
     }
 
@@ -103,9 +102,7 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
     @SingleClick
     @Override
     public void onClick(View v) {
-        if (v == mFloatingView) {
-            startActivity(StudentAddCourseActivity.class);
-        }
+
     }
 
 
@@ -121,5 +118,20 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements  Ba
 
         CourseActivity.start(getActivity(), mAdapter.getItem(position));
 
+    }
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        postDelayed(() -> {
+            mAdapter.clearData();
+            mAdapter.setData(coursesData());
+            mRefreshLayout.finishRefresh();
+            toast("刷新完成");
+        }, 1000);
     }
 }

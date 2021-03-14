@@ -4,46 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="ui.activity.CourseActivity">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="创建课程" />
+        app:title="课程信息" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:background="@color/springGreen"
-        android:gravity="center"
         android:orientation="horizontal"
         android:paddingHorizontal="30dp">
 
-        <com.lft.widget.view.ClearEditText
-            android:id="@+id/et_create_course_name"
-            android:layout_width="0px"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:layout_marginHorizontal="30dp"
-            android:background="@drawable/home_search_bar_transparent_bg"
-            android:drawablePadding="15dp"
-            android:drawableTop="@drawable/white_selector"
-            android:drawableBottom="@drawable/white_selector"
-            android:hint="@string/course_name_hint"
-            android:inputType="text"
-            android:singleLine="true"
-            android:textColor="@color/black50"
-            android:textSize="14sp" />
+            android:text="签到有效时间："
+            android:textSize="18dp"
+            android:layout_gravity="center"
+            />
+        <Spinner
+            android:id="@+id/sp_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:spinnerMode="dropdown"
+            android:entries="@array/expiration"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_create_course"
+            android:id="@+id/btn_sign_commit"
             style="@style/BlueButtonStyle"
-            android:layout_width="0px"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_gravity="center"
             android:layout_marginVertical="30dp"
-            android:text="@string/teacher_add_course" />
+            android:text="@string/common_sign_start" />
 
     </LinearLayout>
 
@@ -53,7 +52,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_tac_tab"
+            android:id="@+id/tl_teacher_course_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/crabBlue"
@@ -65,11 +64,11 @@
             app:tabTextColor="@color/black40" />
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp_tac_pager"
+            android:id="@+id/vp_teacher_course_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/shrimpGrey"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
     </LinearLayout>
+
 </LinearLayout>

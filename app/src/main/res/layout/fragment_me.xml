@@ -14,7 +14,7 @@
         app:backButton="false"
         app:title="@string/home_nav_me" />
     <com.lft.widget.layout.SettingBar
-        android:id="@+id/fl_me_avatar"
+        android:id="@+id/sb_me_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/white_selector"

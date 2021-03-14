@@ -41,10 +41,8 @@ import java.util.List;
  * @date 2021/2/10 22:34
  */
 public class TeacherAddCourseActivity extends MyActivity
-        implements XCollapsingToolbarLayout.OnScrimsListener, AddStudentFragment.AddStudentCallBack {
+        implements AddStudentFragment.AddStudentCallBack {
 
-    private XCollapsingToolbarLayout mCollapsingToolbarLayout;
-    private Toolbar mToolbar;
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -66,8 +64,6 @@ public class TeacherAddCourseActivity extends MyActivity
 
     @Override
     protected void initView() {
-        mCollapsingToolbarLayout = findViewById(R.id.ctl_tac_bar);
-        mToolbar = findViewById(R.id.tb_tac_title);
 
         mTabLayout = findViewById(R.id.tl_tac_tab);
         mViewPager = findViewById(R.id.vp_tac_pager);
@@ -83,12 +79,6 @@ public class TeacherAddCourseActivity extends MyActivity
         mViewPager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
-
-        // 给这个 ToolBar 设置顶部内边距，才能和 TitleBar 进行对齐
-        ImmersionBar.setTitleBar(this, mToolbar);
-
-        //设置渐变监听
-        mCollapsingToolbarLayout.setOnScrimsListener(this);
 
 
         setOnClickListener(mCreateCourse);
@@ -136,26 +126,5 @@ public class TeacherAddCourseActivity extends MyActivity
     }
 
 
-    /**
-     * CollapsingToolbarLayout 渐变回调
-     * <p>
-     * {@link XCollapsingToolbarLayout.OnScrimsListener}
-     */
-    @SuppressLint("RestrictedApi")
-    @Override
-    public void onScrimsStateChange(XCollapsingToolbarLayout layout, boolean shown) {
-        if (shown) {
-            mCourseName.setBackgroundResource(R.drawable.home_search_bar_gray_bg);
-            mCourseName.setHintTextColor(ContextCompat.getColor(this, R.color.black60));
-            mCourseName.setTextColor(ContextCompat.getColor(this, R.color.black60));
-            getStatusBarConfig().statusBarDarkFont(true).init();
-        } else {
-            mCourseName.setBackgroundResource(R.drawable.home_search_bar_transparent_bg);
-            mCourseName.setHintTextColor(ContextCompat.getColor(this, R.color.white60));
-            mCourseName.setTextColor(ContextCompat.getColor(this, R.color.white60));
-            getStatusBarConfig().statusBarDarkFont(false).init();
-        }
-
-    }
 
 }

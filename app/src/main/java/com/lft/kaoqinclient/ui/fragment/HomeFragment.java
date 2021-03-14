@@ -70,9 +70,9 @@ public final class HomeFragment extends MyFragment<HomeActivity>
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         String identity = sharedPreferences.getString("user_identity", null);
         if ("student".equals(identity)){
-            mPagerAdapter.addFragment(CoursesFragment.newInstance(), "课表");
+            mPagerAdapter.addFragment(CoursesFragment.newInstance(), "我的课表");
         }else if ("teacher".equals(identity)){
-            mPagerAdapter.addFragment(TeacherCourseFragment.newInstance(), "课程");
+            mPagerAdapter.addFragment(TeacherCourseFragment.newInstance(), "我的课程");
         }
         mViewPager.setAdapter(mPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -20,6 +19,7 @@ import com.lft.kaoqinclient.http.request.CourseHaveCodeApi;
 import com.lft.kaoqinclient.http.request.StudentSignApi;
 import com.lft.kaoqinclient.http.response.CourseBean;
 import com.lft.kaoqinclient.other.IntentKey;
+import com.lft.widget.layout.SettingBar;
 
 /**
  * TODO
@@ -29,25 +29,21 @@ import com.lft.kaoqinclient.other.IntentKey;
  */
 public final class CourseActivity extends MyActivity {
 
-    private Button signView;
-    private EditText codeView;
-    private TextView attendanceRateView;
+    private Button mSignView;
+    private EditText mSignCode;
+    private SettingBar mCourseName;
+    private SettingBar mAttendanceRate;
+    private SettingBar mLeaveNum;
+    private SettingBar mLateNum;
 
-    private int courseId;
-    private String attendanceRate;
+    private CourseBean course;
 
 
     @DebugLog
     public static void start(Context context, CourseBean course) {
         Intent intent = new Intent(context, CourseActivity.class);
-        intent.putExtra(IntentKey.CS_ID, course.getId());
+        intent.putExtra(IntentKey.COURSE, course);
         intent.putExtra(IntentKey.COURSE_ID, course.getCourseId());
-        intent.putExtra(IntentKey.STUDENT_ID, course.getStudentId());
-        intent.putExtra(IntentKey.COURSE_NAME, course.getCourseName());
-        intent.putExtra(IntentKey.LEAVE_NUMBER, course.getLeaveNumber());
-        intent.putExtra(IntentKey.LATE_NUMBER, course.getLateNumber());
-        intent.putExtra(IntentKey.SIGN_NUMBER, course.getSignNumber());
-        intent.putExtra(IntentKey.ATTENDANCE_RATE, course.getAttendanceRate());
         context.startActivity(intent);
     }
 
@@ -58,9 +54,12 @@ public final class CourseActivity extends MyActivity {
 
     @Override
     protected void initView() {
-        signView = findViewById(R.id.btn_student_sign_commit);
-        codeView = findViewById(R.id.et_student_sign_code);
-        attendanceRateView = findViewById(R.id.tv_attendance_rate);
+        mSignView = findViewById(R.id.btn_student_sign_commit);
+        mSignCode = findViewById(R.id.et_student_sign_code);
+        mAttendanceRate = findViewById(R.id.sb_attendance_rate);
+        mCourseName = findViewById(R.id.sb_course_name);
+        mLateNum = findViewById(R.id.sb_late_number);
+        mLeaveNum = findViewById(R.id.sb_leave_number);
 
         EasyHttp.get(this).api(new CourseHaveCodeApi()
                 .setCourseId(getInt(IntentKey.COURSE_ID)))
@@ -69,35 +68,39 @@ public final class CourseActivity extends MyActivity {
                     @Override
                     public void onSucceed(HttpData<Boolean> data) {
                         if (!data.getData()){
-                            codeView.setVisibility(View.INVISIBLE);
-                            signView.setText(getString(R.string.sign_no_code));
+                            mSignCode.setVisibility(View.INVISIBLE);
+                            mSignView.setText(getString(R.string.sign_no_code));
+                            mSignView.setEnabled(false);
                         }
                     }
 
                 });
 
-        setOnClickListener(signView);
+        setOnClickListener(mSignView);
 
         InputTextHelper.with(this)
-                .addView(codeView)
-                .setMain(signView)
+                .addView(mSignCode)
+                .setMain(mSignView)
                 .build();
     }
 
     @Override
     protected void initData() {
-        courseId = getInt(IntentKey.COURSE_ID);
-        attendanceRate = String.valueOf(getDouble(IntentKey.ATTENDANCE_RATE));
-        attendanceRateView.setText(attendanceRate);
+        course = getSerializable(IntentKey.COURSE);
+
+        mCourseName.setRightText(course.getCourseName());
+        mAttendanceRate.setRightText(String.format("%.2f", course.getAttendanceRate()));
+        mLateNum.setRightText("" + course.getLateNumber());
+        mLeaveNum.setRightText(""+ course.getLeaveNumber());
     }
 
     @SingleClick
     @Override
     public void onClick(View v) {
 
-        if (v == signView) {
+        if (v == mSignView) {
 
-            if (codeView.getText().toString().length() != getResources().getInteger(R.integer.sign_code_length)) {
+            if (mSignCode.getText().toString().length() != getResources().getInteger(R.integer.sign_code_length)) {
                 ToastUtils.show(R.string.sign_fail);
                 return;
             }
@@ -105,19 +108,22 @@ public final class CourseActivity extends MyActivity {
             // 签到
             EasyHttp.get(this)
                     .api(new StudentSignApi()
-                            .setCourseId(courseId)
-                            .setCode( codeView.getText().toString() ) )
-                    .request(new HttpCallback<HttpData<Void>>(this) {
+                            .setCourseId(course.getCourseId())
+                            .setCode( mSignCode.getText().toString() ) )
+                    .request(new HttpCallback<HttpData<Boolean>>(this) {
 
                         @Override
-                        public void onSucceed(HttpData<Void> data) {
-                            toast(R.string.sign_success);
-                            finish();
-                        }
+                        public void onSucceed(HttpData<Boolean> data) {
+                            if (data.getData()){
+                                mSignCode.setVisibility(View.INVISIBLE);
+                                mSignView.setText(getString(R.string.signed));
+                                mSignView.setEnabled(false);
 
-                        @Override
-                        public void onFail(Exception e) {
-                            ToastUtils.show(R.string.sign_fail + '\n' + e.getMessage());
+                                toast(getString(R.string.sign_success));
+                            }
+                            else {
+                                toast(getString(R.string.sign_fail));
+                            }
                         }
 
                     });

@@ -25,7 +25,9 @@ import com.lft.kaoqinclient.common.MyActivity;
 import com.lft.kaoqinclient.helper.InputTextHelper;
 import com.lft.kaoqinclient.http.model.HttpData;
 import com.lft.kaoqinclient.http.request.LoginApi;
+import com.lft.kaoqinclient.http.request.UserInfoApi;
 import com.lft.kaoqinclient.http.response.LoginBean;
+import com.lft.kaoqinclient.http.response.UserInfoBean;
 import com.lft.kaoqinclient.other.IntentKey;
 import com.lft.kaoqinclient.other.KeyboardWatcher;
 
@@ -144,6 +146,7 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
                             //保存本地
                             SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
                             sharedPreferences.edit().putString("Authorization", "Bearer "+data.getData().getToken());
+                            initUserInfo();
                             // 跳转到主页
                             startActivity(HomeActivity.class);
                             finish();
@@ -154,6 +157,27 @@ public final class LoginActivity extends MyActivity implements KeyboardWatcher.S
         }
     }
 
+    private void initUserInfo(){
+        EasyHttp.get(this)
+                .api(new UserInfoApi())
+                .request(new HttpCallback<HttpData<UserInfoBean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<UserInfoBean> data) {
+                        UserInfoBean user = data.getData();
+                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                        sharedPreferences.edit()
+                                .putInt("user_id", user.getId())
+                                .putString("user_uid", user.getUid())
+                                .putString("user_name", user.getName())
+                                .putString("user_email", user.getEmail())
+                                .putString("user_identity",user.getIdentity())
+                                .putString("user_sex", user.getSex())
+                                .putString("user_class", user.getClassName())
+                                .apply();
+                    }
+                });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

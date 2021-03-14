@@ -1,5 +1,7 @@
 package com.lft.kaoqinclient.http.response;
 
+import java.io.Serializable;
+
 /**
  * TODO
  * author LFT
@@ -7,12 +9,13 @@ package com.lft.kaoqinclient.http.response;
  * @date 2021/2/1 19:32
  */
 
-public class CourseBean {
+public class CourseBean implements Serializable {
 
     private Integer id;
     private Integer courseId;
     private Integer studentId;
     private String sid;
+    private String teacherName;
     private String courseName;
     private Integer leaveNumber;
     private Integer lateNumber;
@@ -89,5 +92,13 @@ public class CourseBean {
 
     public void setAttendanceRate(Double attendanceRate) {
         this.attendanceRate = attendanceRate;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 }

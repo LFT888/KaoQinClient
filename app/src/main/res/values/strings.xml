@@ -6,6 +6,7 @@
     <string name="sign_success">签到成功</string>
     <string name="sign_fail">签到失败</string>
     <string name="sign_no_code">当前无签到</string>
+    <string name="signed">签到已完成</string>
 
 
     <!-- 课程 -->
@@ -14,10 +15,13 @@
     <string name="student_add_course_next">查找课程</string>
     <string name="student_add_course_join">申请加入</string>
     <string name="teacher_add_course_title">添加课程</string>
-    <string name="teacher_add_course_name_hint">课程名</string>
+    <string name="course_name_hint">课程名</string>
     <string name="teacher_add_course">创建课程</string>
     <string name="teacher_add_course_student">添加学生</string>
     <string name="class_name">班级名</string>
+    <string name="attendance_rate">到课率</string>
+    <string name="leave_number">旷课数</string>
+    <string name="late_number">迟到数</string>
 
     <!-- 通用的 -->
     <string name="common_id_input_hint">输入学工号</string>
@@ -51,6 +55,7 @@
     <string name="common_cancel">取消</string>
 
     <string name="common_sign">签到</string>
+    <string name="common_sign_start">发布签到</string>
     <string name="common_sign_input_hint">输入签到码</string>
     
     <string name="common_year">年</string>

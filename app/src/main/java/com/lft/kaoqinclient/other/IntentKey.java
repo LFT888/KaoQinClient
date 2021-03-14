@@ -103,12 +103,11 @@ public final class IntentKey {
 
     //课程相关
     public static final String CS_ID = "cs_id";
+    public static final String COURSE = "course";
     public static final String COURSE_ID = "course_id";
-    public static final String STUDENT_ID = "student_id";
     public static final String COURSE_NAME = "course_name";
-    public static final String LEAVE_NUMBER = "leave_number";
-    public static final String LATE_NUMBER = "late_number";
-    public static final String SIGN_NUMBER = "sign_number";
-    public static final String ATTENDANCE_RATE = "attendance_rate";
+    public static final String COURSE_SID =  "course_sid";
 
+    //签到列表
+    public static final String SIGN_IN_LIST = "sign_in_list";
 }

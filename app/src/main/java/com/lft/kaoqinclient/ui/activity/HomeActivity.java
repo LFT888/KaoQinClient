@@ -3,19 +3,25 @@ package com.lft.kaoqinclient.ui.activity;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.lft.base.BaseFragmentAdapter;
 import com.lft.kaoqinclient.R;
 import com.lft.kaoqinclient.common.MyActivity;
 import com.lft.kaoqinclient.common.MyFragment;
 import com.lft.kaoqinclient.helper.ActivityStackManager;
 import com.lft.kaoqinclient.helper.DoubleClickHelper;
+import com.lft.kaoqinclient.http.model.HttpData;
+import com.lft.kaoqinclient.http.request.UserInfoApi;
+import com.lft.kaoqinclient.http.response.UserInfoBean;
 import com.lft.kaoqinclient.other.KeyboardWatcher;
-import com.lft.kaoqinclient.ui.fragment.FindFragment;
 import com.lft.kaoqinclient.ui.fragment.HomeFragment;
 import com.lft.kaoqinclient.ui.fragment.MeFragment;
 import com.lft.kaoqinclient.ui.fragment.MessageFragment;
@@ -36,6 +42,7 @@ public final class HomeActivity extends MyActivity
 
     @Override
     protected void initView() {
+
         mViewPager = findViewById(R.id.vp_home_pager);
         mBottomNavigationView = findViewById(R.id.bv_home_navigation);
 
@@ -49,9 +56,9 @@ public final class HomeActivity extends MyActivity
 
     @Override
     protected void initData() {
+
         mPagerAdapter = new BaseFragmentAdapter<>(this);
         mPagerAdapter.addFragment(HomeFragment.newInstance());
-        mPagerAdapter.addFragment(FindFragment.newInstance());
         mPagerAdapter.addFragment(MessageFragment.newInstance());
         mPagerAdapter.addFragment(MeFragment.newInstance());
         // 设置成懒加载模式
@@ -69,14 +76,11 @@ public final class HomeActivity extends MyActivity
             case R.id.menu_home:
                 mViewPager.setCurrentItem(0);
                 return true;
-            case R.id.home_found:
+            case R.id.home_message:
                 mViewPager.setCurrentItem(1);
                 return true;
-            case R.id.home_message:
-                mViewPager.setCurrentItem(2);
-                return true;
             case R.id.home_me:
-                mViewPager.setCurrentItem(3);
+                mViewPager.setCurrentItem(2);
                 return true;
             default:
                 break;

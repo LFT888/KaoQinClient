@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/springGreen"
     android:orientation="vertical"
     tools:context="ui.activity.CourseActivity">
 
@@ -16,10 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:layoutAnimation="@anim/fall_down_layout"
         android:orientation="vertical"
-        android:paddingHorizontal="40dp"
-        tools:layoutAnimation="@null">
+        android:paddingHorizontal="40dp">
 
     <com.lft.widget.view.ClearEditText
         android:id="@+id/et_student_sign_code"
@@ -48,20 +47,76 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="32sp"
-            android:text="到课率:" />
+        <View
+            style="@style/HorizontalLineStyle"
+            android:layout_width="60dp"
+            android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/tv_attendance_rate"
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="32sp"
-            android:text="0" />
+            android:layout_marginHorizontal="15dp"
+            android:text="课程信息"
+            android:textColor="@color/black50" />
+
+        <View
+            style="@style/HorizontalLineStyle"
+            android:layout_width="60dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <com.lft.widget.layout.SettingBar
+            android:id="@+id/sb_course_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/enamel"
+            android:layout_marginTop="10dp"
+            app:bar_leftSize="8dp"
+            app:bar_rightSize="8dp"
+            app:bar_leftText="@string/course_name_hint"
+            tools:bar_rightText="Java" />
+
+        <com.lft.widget.layout.SettingBar
+            android:id="@+id/sb_attendance_rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/enamel"
+            android:layout_marginTop="1dp"
+            app:bar_leftSize="8dp"
+            app:bar_rightSize="8dp"
+            app:bar_leftText="@string/attendance_rate"
+            tools:bar_rightText="1.00" />
+        <com.lft.widget.layout.SettingBar
+            android:id="@+id/sb_leave_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/enamel"
+            android:layout_marginTop="1dp"
+            app:bar_leftSize="8dp"
+            app:bar_rightSize="8dp"
+            app:bar_leftText="@string/leave_number"
+            tools:bar_rightText="0" />
+        <com.lft.widget.layout.SettingBar
+            android:id="@+id/sb_late_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/enamel"
+            android:layout_marginTop="1dp"
+            app:bar_leftSize="8dp"
+            app:bar_rightSize="8dp"
+            app:bar_leftText="@string/late_number"
+            tools:bar_rightText="0" />
 
     </LinearLayout>
 

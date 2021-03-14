@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lft.kaoqinclient.ui.fragment.HomeFragment"
+    tools:context="ui.fragment.HomeFragment"
     tools:ignore="HardcodedText">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,7 +17,7 @@
         <com.lft.kaoqinclient.widget.XCollapsingToolbarLayout
             android:id="@+id/ctl_home_bar"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="224dp"
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:scrimVisibleHeightTrigger="100dp">
@@ -55,7 +55,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:gravity="center_vertical"
-                        android:text="广州"
+                        android:text="韶关"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
 
@@ -65,10 +65,9 @@
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="20dp"
                         android:layout_weight="1"
-                        android:background="@drawable/home_search_bar_transparent_bg"
                         android:gravity="center"
-                        android:text="完善细节，追求完美"
-                        android:textColor="@color/white60"
+                        android:text="SGU考勤"
+                        android:textColor="@color/black50"
                         android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -76,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
-                        app:srcCompat="@drawable/search_ic"
+                        app:srcCompat="@drawable/safe_ic"
                         app:tint="@color/white" />
 
                 </LinearLayout>
@@ -89,6 +88,7 @@
             android:id="@+id/tl_home_tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/enamel"
             app:tabRippleColor="@color/transparent"
             app:tabIndicatorColor="@color/colorAccent"
             app:tabIndicatorFullWidth="false"
@@ -102,6 +102,7 @@
         android:id="@+id/vp_home_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/springGreen"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

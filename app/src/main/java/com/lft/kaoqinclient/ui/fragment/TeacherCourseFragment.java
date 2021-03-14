@@ -22,6 +22,7 @@ import com.lft.kaoqinclient.http.response.UserInfoBean;
 import com.lft.kaoqinclient.ui.activity.CourseActivity;
 import com.lft.kaoqinclient.ui.activity.StudentAddCourseActivity;
 import com.lft.kaoqinclient.ui.activity.TeacherAddCourseActivity;
+import com.lft.kaoqinclient.ui.activity.TeacherCourseActivity;
 import com.lft.kaoqinclient.ui.adapter.CoursesAdapter;
 import com.lft.kaoqinclient.ui.adapter.TeacherCourseAdapter;
 import com.lft.widget.layout.WrapRecyclerView;
@@ -54,15 +55,15 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements OnR
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_courses;
+        return R.layout.fragment_teacher_course;
     }
 
     @Override
     protected void initView() {
 
-        mRefreshLayout = findViewById(R.id.rl_courses_refresh);
-        mRecyclerView = findViewById(R.id.rv_courses_list);
-        mFloatingView = findViewById(R.id.fab_add_floating);
+        mRefreshLayout = findViewById(R.id.rl_teacher_courses_refresh);
+        mRecyclerView = findViewById(R.id.rv_teacher_courses_list);
+        mFloatingView = findViewById(R.id.fab_teacher_add_floating);
 
         mAdapter = new TeacherCourseAdapter(getAttachActivity());
         mAdapter.setOnItemClickListener(this);
@@ -83,17 +84,25 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements OnR
 
     private List<TeacherCourseBean> coursesData(){
 
-        EasyHttp.get(getAttachActivity())
-                    .api(new TeacherCoursesApi())
-                    .request(new HttpCallback<HttpData<List<TeacherCourseBean>>>(getAttachActivity()){
-                        @Override
-                        public void onSucceed(HttpData<List<TeacherCourseBean>> data) {
-                            list = data.getData();
-                        }
+        TeacherCourseBean bean = new TeacherCourseBean();
+        bean.setCourseSid("10001");
+        bean.setCourseId(1);
+        bean.setCourseName("Java");
+        list = new ArrayList<>();
+        list.add(bean);
+        return list;
 
-        });
-
-        return list == null ? new ArrayList<>() : list;
+//        EasyHttp.get(getAttachActivity())
+//                    .api(new TeacherCoursesApi())
+//                    .request(new HttpCallback<HttpData<List<TeacherCourseBean>>>(getAttachActivity()){
+//                        @Override
+//                        public void onSucceed(HttpData<List<TeacherCourseBean>> data) {
+//                            list = data.getData();
+//                        }
+//
+//        });
+//
+//        return list == null ? new ArrayList<>() : list;
     }
 
     @SingleClick
@@ -114,8 +123,7 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements OnR
      */
     @Override
     public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-
-
+        TeacherCourseActivity.start(getActivity(), mAdapter.getItem(position));
     }
 
     @Override

@@ -117,7 +117,18 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
-
+        <!-- 老师课程详情页面 -->
+        <activity
+            android:name=".ui.activity.TeacherCourseActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 老师课程签到日志 -->
+        <activity
+            android:name=".ui.activity.SignInLogActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
 
         <!-- 拍照选择 -->
         <activity
