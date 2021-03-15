@@ -80,10 +80,17 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements OnR
 
     @Override
     protected void initData() {
-        mAdapter.setData(coursesData());
+
+        coursesData();
+        postDelayed(() -> {
+            list = list == null ? new ArrayList<>() : list;
+            mAdapter.setData(list);
+            mRefreshLayout.finishRefresh();
+        }, 800);
+
     }
 
-    private List<CourseBean> coursesData(){
+    private void coursesData(){
 
         EasyHttp.get(getAttachActivity())
                 .api(new StudentCoursesApi())
@@ -95,7 +102,6 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements OnR
 
                 });
 
-        return list == null ? new ArrayList<>() : list;
     }
 
 
@@ -127,9 +133,12 @@ public final class CoursesFragment extends MyFragment<MyActivity> implements OnR
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+
+        coursesData();
         postDelayed(() -> {
             mAdapter.clearData();
-            mAdapter.setData(coursesData());
+            mAdapter.setData(list);
             mRefreshLayout.finishRefresh();
             toast("刷新完成");
         }, 1000);

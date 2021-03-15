@@ -5,11 +5,16 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.lft.base.BaseAdapter;
 import com.lft.base.BaseDialog;
 import com.lft.kaoqinclient.R;
 import com.lft.kaoqinclient.common.MyActivity;
 import com.lft.kaoqinclient.common.MyFragment;
+import com.lft.kaoqinclient.http.model.HttpData;
+import com.lft.kaoqinclient.http.request.SignInLogApi;
+import com.lft.kaoqinclient.http.request.SignInTableApi;
 import com.lft.kaoqinclient.http.response.SignInListBean;
 import com.lft.kaoqinclient.http.response.SignInLogBean;
 import com.lft.kaoqinclient.http.response.StudentInfoBean;
@@ -81,24 +86,39 @@ public class TeacherSignInLogFragment extends MyFragment<MyActivity> implements 
 
     @Override
     protected void initData() {
-        logList = new ArrayList<>();
-        SignInLogBean bean = new SignInLogBean();
-        bean.setActualNumber(35);
-        bean.setShouldAttend(35);
-        bean.setCourseTime("2021090909");
-        bean.setLeaveNumber(0);
-        bean.setLateNumber(0);
-        SignInListBean l = new SignInListBean();
-        l.setSignInInfo("已签到");
-        l.setClassName("计科");
-        l.setName("lft");
-        l.setUid("17115012036");
-        List<SignInListBean> ll = new ArrayList<>();
-        ll.add(l);
-        bean.setList(ll);
+//        logList = new ArrayList<>();
+//        SignInLogBean bean = new SignInLogBean();
+//        bean.setActualNumber(35);
+//        bean.setShouldAttend(35);
+//        bean.setCourseTime("2021090909");
+//        bean.setLeaveNumber(0);
+//        bean.setLateNumber(0);
+//        SignInListBean l = new SignInListBean();
+//        l.setSignInInfo("已签到");
+//        l.setClassName("计科");
+//        l.setName("lft");
+//        l.setUid("17115012036");
+//        List<SignInListBean> ll = new ArrayList<>();
+//        ll.add(l);
+//        bean.setList(ll);
 
-        logList.add(bean);
-        mAdapter.setData(logList);
+        EasyHttp.get(getAttachActivity())
+                .api(new SignInLogApi()
+                        .setCourseId(courseId) )
+                .request(new HttpCallback<HttpData<List<SignInLogBean>>>(getAttachActivity()){
+                    @Override
+                    public void onSucceed(HttpData<List<SignInLogBean>> data) {
+                        logList = data.getData();
+                    }
+                });
+
+
+        postDelayed(() -> {
+            logList = logList == null ? new ArrayList<>() : logList;
+            mAdapter.setData(logList);
+            mRefreshLayout.finishRefresh();
+        }, 700);
+
     }
 
 

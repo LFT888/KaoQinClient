@@ -91,10 +91,16 @@ public class TeacherSignFragment extends MyFragment<MyActivity> implements OnRef
         strings.add("改为旷课");
         strings.add("改为请假");
 
-        mAdapter.setData(studentData());
+
+        studentData();
+        postDelayed(() -> {
+            list = list == null ? new ArrayList<>() : list;
+            mAdapter.setData(list);
+            mRefreshLayout.finishRefresh();
+        }, 600);
     }
 
-    public List<SignInListBean> studentData(){
+    public void studentData(){
 //
 //        if (true){
 //            list = new ArrayList<>();
@@ -124,7 +130,6 @@ public class TeacherSignFragment extends MyFragment<MyActivity> implements OnRef
                 }
             });
 
-        return list;
 
     }
 
@@ -195,9 +200,11 @@ public class TeacherSignFragment extends MyFragment<MyActivity> implements OnRef
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+        studentData();
         postDelayed(() -> {
             mAdapter.clearData();
-            mAdapter.setData(studentData());
+            mAdapter.setData(list);
             mRefreshLayout.finishRefresh();
             toast("刷新完成");
         }, 1000);

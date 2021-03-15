@@ -48,29 +48,29 @@ public final class SplashActivity extends MyActivity {
         }
 
 
-        if (true){
-            SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-            sharedPreferences.edit()
-                    .putString("user_uid", "17115012036")
-                    .putString("user_name", "lft")
-                    .putString("user_email", "11@qq.com")
-                    .putString("user_identity", "student")
-                    .putString("user_sex", "男")
-                    .putString("user_class", "17计科2班")
-                    .apply();
-
-            EasyConfig.getInstance()
-                    .addHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNzExNTAxMjAzNiIsImV4cCI6MTYxNjMzMzIyOCwiaWF0IjoxNjE1NzI4NDI4fQ.2S6aRfzmwDyEtleHUC5YjA0elkMoQCTon0Mzvzti1taexqYfyP7vNdQakZQd5w7ugyD_bjvnUCNeLLswS0j5Ug");
-            mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    startActivity(HomeActivity.class);
-                    finish();
-                }
-            });
-            return;
-        }
+//        if (true){
+//            SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+//            sharedPreferences.edit()
+//                    .putString("user_uid", "17115012036")
+//                    .putString("user_name", "lft")
+//                    .putString("user_email", "11@qq.com")
+//                    .putString("user_identity", "student")
+//                    .putString("user_sex", "男")
+//                    .putString("user_class", "17计科2班")
+//                    .apply();
+//
+//            EasyConfig.getInstance()
+//                    .addHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNzExNTAxMjAzNiIsImV4cCI6MTYxNjMzMzIyOCwiaWF0IjoxNjE1NzI4NDI4fQ.2S6aRfzmwDyEtleHUC5YjA0elkMoQCTon0Mzvzti1taexqYfyP7vNdQakZQd5w7ugyD_bjvnUCNeLLswS0j5Ug");
+//            mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
+//
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    startActivity(HomeActivity.class);
+//                    finish();
+//                }
+//            });
+//            return;
+//        }
 
 
         SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);

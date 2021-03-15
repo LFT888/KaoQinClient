@@ -79,30 +79,36 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements OnR
 
     @Override
     protected void initData() {
-        mAdapter.setData(coursesData());
+
+        coursesData();
+        postDelayed(() -> {
+            list = list == null ? new ArrayList<>() : list;
+            mAdapter.setData(list);
+            mRefreshLayout.finishRefresh();
+        }, 700);
+
     }
 
-    private List<TeacherCourseBean> coursesData(){
+    private void coursesData(){
 
-        TeacherCourseBean bean = new TeacherCourseBean();
-        bean.setCourseSid("10001");
-        bean.setCourseId(1);
-        bean.setCourseName("Java");
-        list = new ArrayList<>();
-        list.add(bean);
-        return list;
+//        TeacherCourseBean bean = new TeacherCourseBean();
+//        bean.setCourseSid("10001");
+//        bean.setCourseId(1);
+//        bean.setCourseName("Java");
+//        list = new ArrayList<>();
+//        list.add(bean);
+//        return list;
 
-//        EasyHttp.get(getAttachActivity())
-//                    .api(new TeacherCoursesApi())
-//                    .request(new HttpCallback<HttpData<List<TeacherCourseBean>>>(getAttachActivity()){
-//                        @Override
-//                        public void onSucceed(HttpData<List<TeacherCourseBean>> data) {
-//                            list = data.getData();
-//                        }
-//
-//        });
-//
-//        return list == null ? new ArrayList<>() : list;
+        EasyHttp.get(getAttachActivity())
+                    .api(new TeacherCoursesApi())
+                    .request(new HttpCallback<HttpData<List<TeacherCourseBean>>>(getAttachActivity()){
+                        @Override
+                        public void onSucceed(HttpData<List<TeacherCourseBean>> data) {
+                            list = data.getData();
+                        }
+
+        });
+
     }
 
     @SingleClick
@@ -133,9 +139,11 @@ public class TeacherCourseFragment extends MyFragment<MyActivity> implements OnR
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+
+        coursesData();
         postDelayed(() -> {
             mAdapter.clearData();
-            mAdapter.setData(coursesData());
+            mAdapter.setData(list);
             mRefreshLayout.finishRefresh();
             toast("刷新完成");
         }, 1000);

@@ -38,7 +38,7 @@
         android:layout_weight="1"
         android:layout_marginRight="10dp"
         android:layout_gravity="center|left"
-        android:text="请假人数" />
+        android:text="未到人数" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"

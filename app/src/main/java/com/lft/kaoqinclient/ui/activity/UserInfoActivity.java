@@ -108,22 +108,22 @@ public final class UserInfoActivity extends MyActivity {
                 onClick(mAvatarLayout);
             }
         } else if (v == mEmailView) {
-            new InputDialog.Builder(this)
-                    // 标题可以不用填写
-                    .setTitle(getString(R.string.personal_data_email_hint))
-                    .setContent(mEmailView.getRightText())
-                    //.setHint(getString(R.string.personal_data_name_hint))
-                    //.setConfirm("确定")
-                    // 设置 null 表示不显示取消按钮
-                    //.setCancel("取消")
-                    // 设置点击按钮后不关闭对话框
-                    //.setAutoDismiss(false)
-                    .setListener((dialog, content) -> {
-                        if (!mEmailView.getRightText().equals(content)) {
-                            mEmailView.setRightText(content);
-                        }
-                    })
-                    .show();
+//            new InputDialog.Builder(this)
+//                    // 标题可以不用填写
+//                    .setTitle(getString(R.string.personal_data_email_hint))
+//                    .setContent(mEmailView.getRightText())
+//                    //.setHint(getString(R.string.personal_data_name_hint))
+//                    //.setConfirm("确定")
+//                    // 设置 null 表示不显示取消按钮
+//                    //.setCancel("取消")
+//                    // 设置点击按钮后不关闭对话框
+//                    //.setAutoDismiss(false)
+//                    .setListener((dialog, content) -> {
+//                        if (!mEmailView.getRightText().equals(content)) {
+//                            mEmailView.setRightText(content);
+//                        }
+//                    })
+//                    .show();
         }
     }
 
